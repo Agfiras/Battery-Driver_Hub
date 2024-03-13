@@ -1,0 +1,2 @@
+cd /d "C:\Users\ageng\OneDrive\Documents\GitHub\Battery-Driver_Hub\BatteryConfig" &msbuild "BatteryConfig.vcxproj" /t:sdvViewer /p:configuration="Debug" /p:platform="x64" /p:SolutionDir="C:\Users\ageng\OneDrive\Documents\GitHub\Battery-Driver_Hub" 
+exit %errorlevel% 
