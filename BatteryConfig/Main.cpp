@@ -3,11 +3,17 @@
 #include "DeviceInstance.hpp"
 #include <wrl/wrappers/corewrappers.h> // for FileHandle
 #include <cassert>
-#include "Cgos.h"
-
-
+#include <Cgos.h>
+#include <iostream>
 
 int wmain(int argc, wchar_t* argv[]) {
+
+    unsigned int hCgos = 0;
+    unsigned int cntCongatecI2C = 0;
+    unsigned int i2cCongatecI2CIndex = 0;
+    int projectorAddress = 0x36; //Projector Address
+    int picAddress = 0x26; //Pic Address
+
     if (argc < 3) {
         wprintf(L"USAGE: \"BatteryConfig.exe <N> <Charge>\" where <N> is the battery index and <Charge> is the new charge.\n");
         return 1;

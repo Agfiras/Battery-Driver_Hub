@@ -57,8 +57,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies),CgosClr.dll;Cgos.h</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)BatteryConfig\Dependecies\Cgos</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CgosClr.lib;$(CoreLibraryDependencies);</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\BatteryConfig\Dependecies\Cgos</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -72,14 +72,16 @@
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)BatteryConfig\Dependecies\Cgos</AdditionalIncludeDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);Cgos.h</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)BatteryConfig\Dependecies\Cgos</AdditionalLibraryDirectories>
+      <AdditionalDependencies>CgosClr.lib;$(CoreLibraryDependencies);</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\BatteryConfig\Dependecies\Cgos</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -91,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battery.hpp" />
+    <ClInclude Include="Dependecies\Cgos\Cgos.h" />
     <ClInclude Include="DeviceInstance.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
