@@ -3,6 +3,8 @@
 #include "DeviceInstance.hpp"
 #include <wrl/wrappers/corewrappers.h> // for FileHandle
 #include <cassert>
+#include "Cgos.h"
+
 
 
 int wmain(int argc, wchar_t* argv[]) {
