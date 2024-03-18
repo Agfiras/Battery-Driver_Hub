@@ -20,6 +20,10 @@ int wmain(int argc, wchar_t* argv[]) {
   unsigned int i2cCongatecI2CIndex = 0;
   int picAddress = 0x26; // Pic Address;
   unsigned long dwUnit = 0 ;
+  unsigned char bAddr = 0;
+  unsigned char *pDatabyte = 0;
+  unsigned long wReg =
+
 
   // Get library and driver versions
   unsigned long dwLibVersion = CgosLibGetVersion();
@@ -52,8 +56,10 @@ int wmain(int argc, wchar_t* argv[]) {
         std::cerr << "no available I2C communication" << std::endl;
     }
     else {
-        std::cerr << "yes theres'" << std::endl;
+        std::cerr << "Availble I2C communications" << std::endl;
+        if(!CgosI2CReadRegister(hCgos,dwUnit,bAddr,wReg,*pDatabyte)
     }
+
   }
 
   // Close the board and cleanup
