@@ -18,7 +18,8 @@ int wmain(int argc, wchar_t* argv[]) {
   HCGOS hCgos = 0;
   unsigned int cntCongatecI2C = 0;
   unsigned int i2cCongatecI2CIndex = 0;
-  int picAddress = 0x26; // Pic Address
+  int picAddress = 0x26; // Pic Address;
+  unsigned long dwUnit = 0 ;
 
   // Get library and driver versions
   unsigned long dwLibVersion = CgosLibGetVersion();
@@ -47,6 +48,12 @@ int wmain(int argc, wchar_t* argv[]) {
   } else {
     std::cerr << "Board opened successfully" << std::endl;
     // Your code to interact with the board using hCgos goes here
+    if (!CgosI2CIsAvailable(hCgos, dwUnit)) {
+        std::cerr << "no available I2C communication" << std::endl;
+    }
+    else {
+        std::cerr << "yes theres'" << std::endl;
+    }
   }
 
   // Close the board and cleanup
