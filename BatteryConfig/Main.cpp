@@ -5,19 +5,57 @@
 #include <cassert>
 #include <Cgos.h>
 #include <iostream> 
+#include <cstdlib>
+#include <cstdlib>
+#include <cctype>
+#include <Windows.h>
+#include "Main.h"
+#include <iostream>
+#include <sstream>
+#include <iomanip>
 
 int wmain(int argc, wchar_t* argv[]) {
+  HCGOS hCgos = 0;
+  unsigned int cntCongatecI2C = 0;
+  unsigned int i2cCongatecI2CIndex = 0;
+  int picAddress = 0x26; // Pic Address
 
-    unsigned int hCgos = 0;
-    unsigned int cntCongatecI2C = 0;
-    unsigned int i2cCongatecI2CIndex = 0;
-    int projectorAddress = 0x36; //Projector Address
-    int picAddress = 0x26; //Pic Address
+  // Get library and driver versions
+  unsigned long dwLibVersion = CgosLibGetVersion();
+  unsigned long dwDrvVersion = CgosLibGetDrvVersion();
 
-    if (argc < 3) {
-        wprintf(L"USAGE: \"BatteryConfig.exe <N> <Charge>\" where <N> is the battery index and <Charge> is the new charge.\n");
-        return 1;
+  // Check library initialization
+  if (!CgosLibInitialize()) {
+    // Handle failed initialization (e.g., log error)
+    std::cerr << "Error: CgosLibInitialize failed" << std::endl;
+    return -1;
+  }
+
+  // Driver installation check (optional)
+  if (!CgosLibInitialize()) { // Assuming this function exists
+    if (!CgosLibInstall(1)) {
+      std::cerr << "Error: driver installation failed" << std::endl;
+      CgosLibUninitialize(); // Cleanup even if install fails
+      return -1;
     }
+  }
+
+  // Open the board
+  hCgos = CgosBoardOpen(0, 0, 0, &hCgos);
+  if (!hCgos) {
+    std::cerr << "Could not open a board" << std::endl;
+  } else {
+    std::cerr << "Board opened successfully" << std::endl;
+    // Your code to interact with the board using hCgos goes here
+  }
+
+  // Close the board and cleanup
+  if (hCgos) {
+    CgosBoardClose(hCgos);
+  }
+  CgosLibUninitialize();
+  std::cout << "checked and closed" << std::endl;
+  return 0;
 
     const unsigned int batteryIdx = _wtoi(argv[1]); // 0 is first battery
     const unsigned int newCharge = _wtoi(argv[2]);
@@ -88,5 +126,5 @@ int wmain(int argc, wchar_t* argv[]) {
     wprintf(L"Battery status (after update):\n");
     status.Print();
 
-    return 0;
+    return 0; 
 }

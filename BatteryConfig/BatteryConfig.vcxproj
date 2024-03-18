@@ -57,8 +57,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>CgosClr.lib;$(CoreLibraryDependencies);</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\BatteryConfig\Dependecies\Cgos</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Cgos.lib;$(CoreLibraryDependencies);</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\BatteryConfig\Dependecies\LIB</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -80,8 +80,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>CgosClr.lib;$(CoreLibraryDependencies);</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\BatteryConfig\Dependecies\Cgos</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Cgos.lib;$(CoreLibraryDependencies);</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\BatteryConfig\Dependecies\LIB</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -95,6 +95,7 @@
     <ClInclude Include="Battery.hpp" />
     <ClInclude Include="Dependecies\Cgos\Cgos.h" />
     <ClInclude Include="DeviceInstance.hpp" />
+    <ClInclude Include="Main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
