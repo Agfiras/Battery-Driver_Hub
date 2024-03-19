@@ -58,7 +58,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Cgos.lib;$(CoreLibraryDependencies);</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\BatteryConfig\Dependecies\LIB</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\BatteryConfig\Dependecies\LIB</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
