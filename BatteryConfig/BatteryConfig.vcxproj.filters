@@ -7,6 +7,5 @@
     <ClInclude Include="Battery.hpp" />
     <ClInclude Include="DeviceInstance.hpp" />
     <ClInclude Include="Dependecies\Cgos\Cgos.h" />
-    <ClInclude Include="Main.h" />
   </ItemGroup>
 </Project>

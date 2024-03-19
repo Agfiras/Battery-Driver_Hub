@@ -95,7 +95,6 @@
     <ClInclude Include="Battery.hpp" />
     <ClInclude Include="Dependecies\Cgos\Cgos.h" />
     <ClInclude Include="DeviceInstance.hpp" />
-    <ClInclude Include="Main.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

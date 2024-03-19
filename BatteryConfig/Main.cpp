@@ -9,7 +9,6 @@
 #include <cstdlib>
 #include <cctype>
 #include <Windows.h>
-#include "Main.h"
 #include <iostream>
 #include <sstream>
 #include <iomanip>
@@ -106,6 +105,10 @@ void ReadBatInfo(std::string& command) {
                     }
                 }
 
+			}
+		}
+    }
+};
 int wmain(int argc, wchar_t* argv[]) {
   HCGOS hCgos = 0;
   unsigned int cntCongatecI2C = 0;
@@ -113,8 +116,8 @@ int wmain(int argc, wchar_t* argv[]) {
   int picAddress = 0x26; // Pic Address;
   unsigned long dwUnit = 0 ;
   unsigned char bAddr = 0;
-  unsigned char *pDatabyte = 0;
-  unsigned long wReg =
+  unsigned char pDatabyte = 0;
+  unsigned long wReg = 0;
 
 
   // Get library and driver versions
@@ -139,20 +142,13 @@ int wmain(int argc, wchar_t* argv[]) {
 
   // Open the board
   hCgos = CgosBoardOpen(0, 0, 0, &hCgos);
-  if (!hCgos) {
+  if (!hCgos) 
+    {
     std::cerr << "Could not open a board" << std::endl;
-  } else {
+    } 
+  else 
+  {
     std::cerr << "Board opened successfully" << std::endl;
-    // Your code to interact with the board using hCgos goes here
-    if (!CgosI2CIsAvailable(hCgos, dwUnit)) {
-        std::cerr << "no available I2C communication" << std::endl;
-    }
-    else {
-        std::cerr << "Availble I2C communications" << std::endl;
-        if(!CgosI2CReadRegister(hCgos,dwUnit,bAddr,wReg,*pDatabyte)
-    }
-  }
-
   // Close the board and cleanup
   if (hCgos) {
     CgosBoardClose(hCgos);
@@ -160,6 +156,7 @@ int wmain(int argc, wchar_t* argv[]) {
   CgosLibUninitialize();
   std::cout << "checked and closed" << std::endl;
   return 0;
+  }
 
     const unsigned int batteryIdx = _wtoi(argv[1]); // 0 is first battery
     const unsigned int newCharge = _wtoi(argv[2]);
