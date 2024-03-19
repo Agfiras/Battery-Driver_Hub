@@ -13,6 +13,98 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <string>
+#include <sstream>
+#include <stdexcept>
+#include <vector> 
+
+void ReadBatInfo(std::string& command) {
+    unsigned int i2cCongatecI2CIndex = 0;
+    UINT16 percentageRemaining = 100;
+    std::string timeToEmpty;
+    std::string timeToFull;
+    HCGOS hCgos = 0;
+    byte addr = 0;
+    byte cmd = 0;
+    
+    try
+    {
+        std::stringstream ss;
+        ss << std::hex << "26";  // Convert constant value to hex
+        ss >> addr;
+        std::stringstream ss1(command);  // Create stream from command string
+        ss1 >> std::hex;
+        
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error converting data: " << e.what() << std::endl;
+    }
+
+    UINT16 data_u16 = 0;
+
+    unsigned char* rData = new unsigned char[2];
+    unsigned char* wData = new unsigned char[1];
+    wData[0] = cmd;
+
+    CgosLibInitialize();
+    hCgos = CgosBoardOpen(0, 0, 0, &hCgos);
+    try
+    {
+        CgosI2CWriteReadCombined(hCgos, i2cCongatecI2CIndex, addr, &wData[0], 1,  &rData[0], 2);
+	}
+	catch (const std::exception& e) 
+    {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
+
+    if(command == "OD")
+        {
+        if (rData[0] <= 100)
+        {
+            percentageRemaining = rData[0];
+			std::cout << "Data: " << rData[0] << std::endl;
+        }
+        else if (command == "12")
+        {
+
+            data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
+            if (data_u16 == 0xFFFF)
+            {
+                timeToEmpty = "Powered.";
+            }
+            else
+            {
+                int hours = data_u16 / 60;
+                int minutes = data_u16 % 60;
+                std::stringstream ss;
+                ss << hours << "h" << minutes << "m";
+                timeToEmpty = ss.str();
+            }
+        }
+        else if (command == "13")
+        {
+            data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
+			if (data_u16 == 0xFFFF)
+			{
+				timeToFull = "Not charging";
+			}
+			else
+			{
+                if (data_u16 <= 300)
+                {
+                    if (data_u16 == 0)
+                    {
+                        timeToFull = "Charged.";
+                    }
+                    else
+                    {
+                        int hours = data_u16 / 60;
+                        int minutes = data_u16 % 60;
+                        std::stringstream ss;
+                        ss << hours << "h" << minutes << "m";
+                        timeToEmpty = ss.str();
+                    }
+                }
 
 int wmain(int argc, wchar_t* argv[]) {
   HCGOS hCgos = 0;
@@ -59,7 +151,6 @@ int wmain(int argc, wchar_t* argv[]) {
         std::cerr << "Availble I2C communications" << std::endl;
         if(!CgosI2CReadRegister(hCgos,dwUnit,bAddr,wReg,*pDatabyte)
     }
-
   }
 
   // Close the board and cleanup
