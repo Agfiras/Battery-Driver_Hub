@@ -17,32 +17,29 @@
 #include <stdexcept>
 #include <vector> 
 
-void ReadBatInfo(std::string& command) {
-    unsigned int i2cCongatecI2CIndex = 0;
+ void ReadBatInfo(std::string command) {
+
+    unsigned int i2cCongatecI2CIndex = 0; // I2C index
     UINT16 percentageRemaining = 100;
-    std::string timeToEmpty;
-    std::string timeToFull;
-    HCGOS hCgos = 0;
-    byte addr = 0;
-    byte cmd = 0;
+    std::string timeToEmpty;      
+    std::string timeToFull;          
+    HCGOS hCgos = 0;    // Handle to the CGOS library
+    byte addr = 26; // Pic Address;
+    byte cmd = 0; // Command
     
-    try
+    try   
     {
-        std::stringstream ss;
-        ss << std::hex << "26";  // Convert constant value to hex
-        ss >> addr;
-        std::stringstream ss1(command);  // Create stream from command string
-        ss1 >> std::hex;
-        
+        //convert addr and cmd to byte
+        addr = std::stoi("26", nullptr, 16);
+        cmd = std::stoi(command, nullptr, 16);
     }
-    catch (const std::exception& e) {
-        std::cerr << "Error converting data: " << e.what() << std::endl;
+    catch (const std::exception&) {
+        std::cerr << "Invalid argument: " << command << std::endl; 
     }
 
     UINT16 data_u16 = 0;
-
-    unsigned char* rData = new unsigned char[2];
-    unsigned char* wData = new unsigned char[1];
+    byte* rData = new byte[2]();
+    byte* wData = new byte[1]();
     wData[0] = cmd;
 
     CgosLibInitialize();
@@ -50,26 +47,26 @@ void ReadBatInfo(std::string& command) {
     try
     {
         CgosI2CWriteReadCombined(hCgos, i2cCongatecI2CIndex, addr, &wData[0], 1,  &rData[0], 2);
-	}
+	}   
 	catch (const std::exception& e) 
     {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
-    if(command == "OD")
+
+    if(command == "0D")
         {
         if (rData[0] <= 100)
         {
             percentageRemaining = rData[0];
-			std::cout << "Data: " << rData[0] << std::endl;
+            std::cout << "Percentage remaining: " << percentageRemaining << "%" << std::endl;
         }
         else if (command == "12")
-        {
-
-            data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
+        {data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
             if (data_u16 == 0xFFFF)
             {
                 timeToEmpty = "Powered.";
+                std::cout << timeToEmpty<< std::endl;
             }
             else
             {
@@ -78,6 +75,7 @@ void ReadBatInfo(std::string& command) {
                 std::stringstream ss;
                 ss << hours << "h" << minutes << "m";
                 timeToEmpty = ss.str();
+                std::cout << timeToEmpty<< std::endl;
             }
         }
         else if (command == "13")
@@ -86,6 +84,7 @@ void ReadBatInfo(std::string& command) {
 			if (data_u16 == 0xFFFF)
 			{
 				timeToFull = "Not charging";
+                std::cout << timeToFull<< std::endl;
 			}
 			else
 			{
@@ -94,6 +93,7 @@ void ReadBatInfo(std::string& command) {
                     if (data_u16 == 0)
                     {
                         timeToFull = "Charged.";
+                        std::cout << timeToFull<< std::endl;
                     }
                     else
                     {
@@ -102,6 +102,7 @@ void ReadBatInfo(std::string& command) {
                         std::stringstream ss;
                         ss << hours << "h" << minutes << "m";
                         timeToEmpty = ss.str();
+                        std::cout << timeToEmpty<< std::endl;
                     }
                 }
 
@@ -118,18 +119,16 @@ int wmain(int argc, wchar_t* argv[]) {
   unsigned char bAddr = 0;
   unsigned char pDatabyte = 0;
   unsigned long wReg = 0;
-
-
   // Get library and driver versions
   unsigned long dwLibVersion = CgosLibGetVersion();
   unsigned long dwDrvVersion = CgosLibGetDrvVersion();
-
+  std::cout << "Library version: " << dwLibVersion << std::endl;
   // Check library initialization
   if (!CgosLibInitialize()) {
     // Handle failed initialization (e.g., log error)
     std::cerr << "Error: CgosLibInitialize failed" << std::endl;
     return -1;
-  }
+    {
 
   // Driver installation check (optional)
   if (!CgosLibInitialize()) { // Assuming this function exists
@@ -138,10 +137,18 @@ int wmain(int argc, wchar_t* argv[]) {
       CgosLibUninitialize(); // Cleanup even if install fails
       return -1;
     }
+   }
   }
+  }
+
+  ReadBatInfo("0D");
+  ReadBatInfo("12");
+  ReadBatInfo("13");
 
   // Open the board
   hCgos = CgosBoardOpen(0, 0, 0, &hCgos);
+
+
   if (!hCgos) 
     {
     std::cerr << "Could not open a board" << std::endl;
@@ -159,7 +166,7 @@ int wmain(int argc, wchar_t* argv[]) {
   }
 
     const unsigned int batteryIdx = _wtoi(argv[1]); // 0 is first battery
-    const unsigned int newCharge = _wtoi(argv[2]);
+    unsigned int newCharge = _wtoi(argv[2]);
 
     wchar_t deviceInstancePath[18] = {};
     swprintf_s(deviceInstancePath, L"SWD\\DEVGEN\\%i", batteryIdx); // add device index suffix
@@ -228,4 +235,4 @@ int wmain(int argc, wchar_t* argv[]) {
     status.Print();
 
     return 0; 
-}
+};
