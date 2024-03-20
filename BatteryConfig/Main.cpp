@@ -17,10 +17,11 @@
 #include <stdexcept>
 #include <vector> 
 
+UINT16 percentageRemaining = 100;
+
  void ReadBatInfo(std::string command) {
 
     unsigned int i2cCongatecI2CIndex = 0; // I2C index
-    UINT16 percentageRemaining = 100;
     std::string timeToEmpty;      
     std::string timeToFull;          
     HCGOS hCgos = 0;    // Handle to the CGOS library
@@ -166,7 +167,7 @@ int wmain(int argc, wchar_t* argv[]) {
   }
 
     const unsigned int batteryIdx = _wtoi(argv[1]); // 0 is first battery
-    unsigned int newCharge = _wtoi(argv[2]);
+    unsigned int newCharge = percentageRemaining ;
 
     wchar_t deviceInstancePath[18] = {};
     swprintf_s(deviceInstancePath, L"SWD\\DEVGEN\\%i", batteryIdx); // add device index suffix
