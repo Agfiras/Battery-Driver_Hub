@@ -16,10 +16,9 @@
 #include <sstream>
 #include <stdexcept>
 #include <vector> 
-
 UINT16 percentageRemaining = 100;
 
- void ReadBatInfo(std::string command) {
+ int ReadBatInfo(std::string command) {
 
     unsigned int i2cCongatecI2CIndex = 0; // I2C index
     std::string timeToEmpty;      
@@ -110,64 +109,44 @@ UINT16 percentageRemaining = 100;
 			}
 		}
     }
+    return percentageRemaining;
 };
 int wmain(int argc, wchar_t* argv[]) {
-  HCGOS hCgos = 0;
-  unsigned int cntCongatecI2C = 0;
+
+  HCGOS hCgos = 0;	// Handle to the CGOS library
   unsigned int i2cCongatecI2CIndex = 0;
   int picAddress = 0x26; // Pic Address;
-  unsigned long dwUnit = 0 ;
-  unsigned char bAddr = 0;
+  unsigned long dwUnit = 0; 
+  unsigned char bAddr = 0;  
   unsigned char pDatabyte = 0;
-  unsigned long wReg = 0;
-  // Get library and driver versions
-  unsigned long dwLibVersion = CgosLibGetVersion();
-  unsigned long dwDrvVersion = CgosLibGetDrvVersion();
-  std::cout << "Library version: " << dwLibVersion << std::endl;
-  // Check library initialization
-  if (!CgosLibInitialize()) {
-    // Handle failed initialization (e.g., log error)
-    std::cerr << "Error: CgosLibInitialize failed" << std::endl;
-    return -1;
-    {
+  unsigned long wReg = 0; 
 
-  // Driver installation check (optional)
-  if (!CgosLibInitialize()) { // Assuming this function exists
-    if (!CgosLibInstall(1)) {
-      std::cerr << "Error: driver installation failed" << std::endl;
-      CgosLibUninitialize(); // Cleanup even if install fails
-      return -1;
-    }
-   }
-  }
-  }
+   ReadBatInfo("0D");
+   ReadBatInfo("12");
+   ReadBatInfo("13");
 
-  ReadBatInfo("0D");
-  ReadBatInfo("12");
-  ReadBatInfo("13");
+  ////// Open the board
+  // hCgos = CgosBoardOpen(0, 0, 0, &hCgos);
 
-  // Open the board
-  hCgos = CgosBoardOpen(0, 0, 0, &hCgos);
-
-
-  if (!hCgos) 
-    {
-    std::cerr << "Could not open a board" << std::endl;
-    } 
-  else 
-  {
-    std::cerr << "Board opened successfully" << std::endl;
-  // Close the board and cleanup
-  if (hCgos) {
-    CgosBoardClose(hCgos);
-  }
-  CgosLibUninitialize();
-  std::cout << "checked and closed" << std::endl;
-  return 0;
-  }
+  //if (!hCgos) 
+  //  {
+  //  std::cerr << "Could not open a board" << std::endl;
+  //  } 
+  //else 
+  //{
+  //  std::cerr << "Board opened successfully" << std::endl;
+  //// Close the board and cleanup
+  //if (hCgos) {
+  //  CgosBoardClose(hCgos);
+  //}
+  //CgosLibUninitialize();
+  //std::cout << "checked and closed" << std::endl;
+  //return 0;
+  //}
 
     const unsigned int batteryIdx = _wtoi(argv[1]); // 0 is first battery
-    unsigned int newCharge = percentageRemaining ;
+
+    unsigned int newCharge = ReadBatInfo("0D");
 
     wchar_t deviceInstancePath[18] = {};
     swprintf_s(deviceInstancePath, L"SWD\\DEVGEN\\%i", batteryIdx); // add device index suffix
