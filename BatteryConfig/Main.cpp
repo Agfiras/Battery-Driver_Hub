@@ -61,7 +61,8 @@ int ReadBatInfo(std::string command) {
         {
             percentageRemaining = rData[0];
         }
-        else if (command == "12")
+    }
+    else if (command == "12")
         {data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
             if (data_u16 == 0xFFFF)
             {
@@ -73,7 +74,6 @@ int ReadBatInfo(std::string command) {
                 powered = false;
             }
         }
-    }
     delete[] rData;
     delete[] wData;
     return percentageRemaining;
@@ -83,12 +83,10 @@ int ReadBatInfo(std::string command) {
 int wmain() {
 
   const unsigned int newCharge = ReadBatInfo("0D") ;  // read battery charge level
-  bool PoweredBatt = ReadBatInfo("12");  // read battery power state
-  wprintf(L"Initial charge level: %u\n", newCharge);    // print battery charge level
-
+  const bool PoweredBatt = ReadBatInfo("12");  // read battery power state
+ 
 	// get battery device instance path
   wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000";
-
   wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath);
 
     std::wstring pdoPath;   // physical device object path
@@ -126,9 +124,7 @@ int wmain() {
     wprintf(L"Battery status (before update):\n");
     status.Print();
     wprintf(L"\n");
-                
-
-    	wprintf(L"New charge level: %u\n", newCharge);
+    wprintf(L"New charge level: %u\n", newCharge);
         // toggle between charge and dischage
         if (PoweredBatt) {
             status.PowerState = BATTERY_POWER_ON_LINE | BATTERY_CHARGING; // charging while on AC power
@@ -141,12 +137,6 @@ int wmain() {
 
         status.Rate = BATTERY_UNKNOWN_RATE; // was 0
         status.Voltage = BATTERY_UNKNOWN_VOLTAGE; // was -1
-
-        status.Set(battery.Get());
-    
-
-    wprintf(L"Battery status (after update):\n");
-    status.Print();
 
     return 0; 
 };
