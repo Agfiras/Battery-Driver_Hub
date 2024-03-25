@@ -20,11 +20,10 @@
 
 int ReadBatInfo(std::string command) {
 
-    unsigned int percentageRemaining = 0;
+    unsigned int percentageRemaining = 0; // Battery charge level
     HCGOS hCgos = 0;    // Handle to the CGOS library
     unsigned int i2cCongatecI2CIndex = 0; // I2C index
-    unsigned int powered = 0 ;      
-    std::string timeToFull;          
+    unsigned int powered = 0 ;    
     byte addr = 26; // Pic Address;
     byte cmd = 0; // Command
     
