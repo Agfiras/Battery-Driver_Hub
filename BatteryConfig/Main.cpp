@@ -23,7 +23,7 @@ int ReadBatInfo(std::string command) {
     unsigned int percentageRemaining = 0;
     HCGOS hCgos = 0;    // Handle to the CGOS library
     unsigned int i2cCongatecI2CIndex = 0; // I2C index
-    int powered = 0 ;      
+    unsigned int powered = 0 ;      
     std::string timeToFull;          
     byte addr = 26; // Pic Address;
     byte cmd = 0; // Command
@@ -57,33 +57,37 @@ int ReadBatInfo(std::string command) {
 
     if(command == "0D")
         {
-        if (rData[0] <= 100)
-        {
-            percentageRemaining = rData[0];
-        }
+          percentageRemaining = rData[0];
     }
     else if (command == "12")
         {data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
             if (data_u16 == 0xFFFF)
             {
-                powered = 1 ;
-                std::cout << "powered "<< std::endl;
+                return powered = 1;
             }
             else
             {
-                powered = 0;
+                return powered = 0 ;
             }
         }
     delete[] rData;
     delete[] wData;
     return percentageRemaining;
-    return powered;
+   
 };  
 
 int wmain() {
 
   const unsigned int newCharge = ReadBatInfo("0D") ;  // read battery charge level
-  const int PoweredBatt = ReadBatInfo("12");  // read battery power state
+  const unsigned int PowerInfo = ReadBatInfo("12"); // read battery power state
+  if (PowerInfo == '1')
+  {
+	  wprintf(L"Power state: Battery is powered\n");
+  }
+  else
+  {
+	  wprintf(L"Power state: Battery is not powered\n");
+  }
  
 	// get battery device instance path
   wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000";
@@ -125,19 +129,20 @@ int wmain() {
     status.Print();
     wprintf(L"\n");
     wprintf(L"New charge level: %u\n", newCharge);
-        // toggle between charge and dischage
-        
-      if (newCharge > status.Capacity)
-         status.PowerState = BATTERY_POWER_ON_LINE | BATTERY_CHARGING; // charging while on AC power
-     else if (newCharge < status.Capacity)
+
+      //toggle between charge and dischage
+      if (PowerInfo == 1 )
+        status.PowerState = BATTERY_POWER_ON_LINE | BATTERY_CHARGING; // charging while on AC power
+      else 
          status.PowerState = BATTERY_DISCHARGING; // discharging
-      else
-         status.PowerState = 0; // same charge as before
+      //
+
         // update charge level
         status.Capacity =newCharge;
 
         status.Rate = BATTERY_UNKNOWN_RATE; // was 0
         status.Voltage = BATTERY_UNKNOWN_VOLTAGE; // was -1
+        status.Set(battery.Get());
 
     return 0; 
 };
