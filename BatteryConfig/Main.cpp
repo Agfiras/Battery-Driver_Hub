@@ -116,16 +116,17 @@ int ReadBatInfo(std::string command) {
 };
 
 int wmain() {
-    
-  // 0 is first battery
-  const unsigned int newCharge = ReadBatInfo("0D") ;
 
-  wprintf(L"Initial charge level: %u\n", newCharge);    
+  const unsigned int newCharge = ReadBatInfo("0D") ;  // read battery charge level
+  wprintf(L"Initial charge level: %u\n", newCharge);    // print battery charge level
+
+	// get battery device instance path
   wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000";
-    //swprintf_s(deviceInstancePath, L"SWD\\DEVGEN\\%i",0); // add device index suffix
+
     wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath);
 
     std::wstring pdoPath;
+
     try {
         DeviceInstance dev(deviceInstancePath);
 
@@ -161,7 +162,6 @@ int wmain() {
     wprintf(L"\n");
                 
 
-    // update battery charge level
     	wprintf(L"New charge level: %u\n", newCharge);
         // toggle between charge and dischage
         if (newCharge > status.Capacity)
