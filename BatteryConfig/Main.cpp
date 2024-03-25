@@ -16,18 +16,19 @@
 #include <sstream>
 #include <stdexcept>
 #include <vector> 
-UINT16 percentageRemaining = 100;
+#include <string>
 
- int ReadBatInfo(std::string command) {
+int ReadBatInfo(std::string command) {
 
+    unsigned int percentageRemaining = 0;
+    HCGOS hCgos = 0;    // Handle to the CGOS library
     unsigned int i2cCongatecI2CIndex = 0; // I2C index
     std::string timeToEmpty;      
     std::string timeToFull;          
-    HCGOS hCgos = 0;    // Handle to the CGOS library
     byte addr = 26; // Pic Address;
     byte cmd = 0; // Command
     
-    try   
+    try
     {
         //convert addr and cmd to byte
         addr = std::stoi("26", nullptr, 16);
@@ -59,7 +60,7 @@ UINT16 percentageRemaining = 100;
         if (rData[0] <= 100)
         {
             percentageRemaining = rData[0];
-            std::cout << "Percentage remaining: " << percentageRemaining << "%" << std::endl;
+            //std::cout << "Percentage remaining: " << percentageRemaining << "%" << std::endl;
         }
         else if (command == "12")
         {data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
@@ -109,47 +110,19 @@ UINT16 percentageRemaining = 100;
 			}
 		}
     }
+    delete[] rData;
+    delete[] wData;
     return percentageRemaining;
 };
-int wmain(int argc, wchar_t* argv[]) {
 
-  HCGOS hCgos = 0;	// Handle to the CGOS library
-  unsigned int i2cCongatecI2CIndex = 0;
-  int picAddress = 0x26; // Pic Address;
-  unsigned long dwUnit = 0; 
-  unsigned char bAddr = 0;  
-  unsigned char pDatabyte = 0;
-  unsigned long wReg = 0; 
+int wmain() {
+    
+  // 0 is first battery
+  const unsigned int newCharge = ReadBatInfo("0D") ;
 
-   ReadBatInfo("0D");
-   ReadBatInfo("12");
-   ReadBatInfo("13");
-
-  ////// Open the board
-  // hCgos = CgosBoardOpen(0, 0, 0, &hCgos);
-
-  //if (!hCgos) 
-  //  {
-  //  std::cerr << "Could not open a board" << std::endl;
-  //  } 
-  //else 
-  //{
-  //  std::cerr << "Board opened successfully" << std::endl;
-  //// Close the board and cleanup
-  //if (hCgos) {
-  //  CgosBoardClose(hCgos);
-  //}
-  //CgosLibUninitialize();
-  //std::cout << "checked and closed" << std::endl;
-  //return 0;
-  //}
-
-    const unsigned int batteryIdx = _wtoi(argv[1]); // 0 is first battery
-
-    unsigned int newCharge = ReadBatInfo("0D");
-
-    wchar_t deviceInstancePath[18] = {};
-    swprintf_s(deviceInstancePath, L"SWD\\DEVGEN\\%i", batteryIdx); // add device index suffix
+  wprintf(L"Initial charge level: %u\n", newCharge);    
+  wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000";
+    //swprintf_s(deviceInstancePath, L"SWD\\DEVGEN\\%i",0); // add device index suffix
     wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath);
 
     std::wstring pdoPath;
@@ -186,14 +159,10 @@ int wmain(int argc, wchar_t* argv[]) {
     wprintf(L"Battery status (before update):\n");
     status.Print();
     wprintf(L"\n");
-
-#if 0
-    // update battery information
-    info.Set(battery.Get());
-#endif
+                
 
     // update battery charge level
-    {
+    	wprintf(L"New charge level: %u\n", newCharge);
         // toggle between charge and dischage
         if (newCharge > status.Capacity)
             status.PowerState = BATTERY_POWER_ON_LINE | BATTERY_CHARGING; // charging while on AC power
@@ -203,13 +172,13 @@ int wmain(int argc, wchar_t* argv[]) {
             status.PowerState = 0; // same charge as before
 
         // update charge level
-        status.Capacity = newCharge;
+        status.Capacity =newCharge;
 
         status.Rate = BATTERY_UNKNOWN_RATE; // was 0
         status.Voltage = BATTERY_UNKNOWN_VOLTAGE; // was -1
 
         status.Set(battery.Get());
-    }
+    
 
     wprintf(L"Battery status (after update):\n");
     status.Print();
