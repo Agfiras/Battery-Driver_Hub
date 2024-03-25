@@ -125,7 +125,7 @@ int wmain() {
 
   wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath);
 
-    std::wstring pdoPath;
+    std::wstring pdoPath;   // physical device object path
 
     try {
         DeviceInstance dev(deviceInstancePath);
