@@ -23,7 +23,7 @@ int ReadBatInfo(std::string command) {
     unsigned int percentageRemaining = 0;
     HCGOS hCgos = 0;    // Handle to the CGOS library
     unsigned int i2cCongatecI2CIndex = 0; // I2C index
-    bool powered = false;      
+    int powered = 0 ;      
     std::string timeToFull;          
     byte addr = 26; // Pic Address;
     byte cmd = 0; // Command
@@ -66,12 +66,12 @@ int ReadBatInfo(std::string command) {
         {data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
             if (data_u16 == 0xFFFF)
             {
-                powered = true ;
+                powered = 1 ;
                 std::cout << "powered "<< std::endl;
             }
             else
             {
-                powered = false;
+                powered = 0;
             }
         }
     delete[] rData;
@@ -83,7 +83,7 @@ int ReadBatInfo(std::string command) {
 int wmain() {
 
   const unsigned int newCharge = ReadBatInfo("0D") ;  // read battery charge level
-  const bool PoweredBatt = ReadBatInfo("12");  // read battery power state
+  const int PoweredBatt = ReadBatInfo("12");  // read battery power state
  
 	// get battery device instance path
   wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000";
@@ -126,12 +126,13 @@ int wmain() {
     wprintf(L"\n");
     wprintf(L"New charge level: %u\n", newCharge);
         // toggle between charge and dischage
-        if (PoweredBatt) {
-            status.PowerState = BATTERY_POWER_ON_LINE | BATTERY_CHARGING; // charging while on AC power
-        }
-        else {
-            status.PowerState = BATTERY_DISCHARGING; // discharging
-        }
+        
+      if (newCharge > status.Capacity)
+         status.PowerState = BATTERY_POWER_ON_LINE | BATTERY_CHARGING; // charging while on AC power
+     else if (newCharge < status.Capacity)
+         status.PowerState = BATTERY_DISCHARGING; // discharging
+      else
+         status.PowerState = 0; // same charge as before
         // update charge level
         status.Capacity =newCharge;
 

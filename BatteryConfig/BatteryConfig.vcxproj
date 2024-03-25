@@ -90,7 +90,6 @@
       <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</TreatWarningAsError>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)BatteryConfig\Dependecies\Cgos</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="read info.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battery.hpp" />
