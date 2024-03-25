@@ -23,7 +23,7 @@ int ReadBatInfo(std::string command) {
     unsigned int percentageRemaining = 0;
     HCGOS hCgos = 0;    // Handle to the CGOS library
     unsigned int i2cCongatecI2CIndex = 0; // I2C index
-    std::string timeToEmpty;      
+    bool powered = false;      
     std::string timeToFull;          
     byte addr = 26; // Pic Address;
     byte cmd = 0; // Command
@@ -34,7 +34,7 @@ int ReadBatInfo(std::string command) {
         addr = std::stoi("26", nullptr, 16);
         cmd = std::stoi(command, nullptr, 16);
     }
-    catch (const std::exception&) {
+    catch (const std::exception&) {     
         std::cerr << "Invalid argument: " << command << std::endl; 
     }
 
@@ -60,64 +60,30 @@ int ReadBatInfo(std::string command) {
         if (rData[0] <= 100)
         {
             percentageRemaining = rData[0];
-            //std::cout << "Percentage remaining: " << percentageRemaining << "%" << std::endl;
         }
         else if (command == "12")
         {data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
             if (data_u16 == 0xFFFF)
             {
-                timeToEmpty = "Powered.";
-                std::cout << timeToEmpty<< std::endl;
+                powered = true ;
+                std::cout << "powered "<< std::endl;
             }
             else
             {
-                int hours = data_u16 / 60;
-                int minutes = data_u16 % 60;
-                std::stringstream ss;
-                ss << hours << "h" << minutes << "m";
-                timeToEmpty = ss.str();
-                std::cout << timeToEmpty<< std::endl;
+                powered = false;
             }
         }
-        else if (command == "13")
-        {
-            data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
-			if (data_u16 == 0xFFFF)
-			{
-				timeToFull = "Not charging";
-                std::cout << timeToFull<< std::endl;
-			}
-			else
-			{
-                if (data_u16 <= 300)
-                {
-                    if (data_u16 == 0)
-                    {
-                        timeToFull = "Charged.";
-                        std::cout << timeToFull<< std::endl;
-                    }
-                    else
-                    {
-                        int hours = data_u16 / 60;
-                        int minutes = data_u16 % 60;
-                        std::stringstream ss;
-                        ss << hours << "h" << minutes << "m";
-                        timeToEmpty = ss.str();
-                        std::cout << timeToEmpty<< std::endl;
-                    }
-                }
-
-			}
-		}
     }
     delete[] rData;
     delete[] wData;
     return percentageRemaining;
-};
+    return powered;
+};  
 
 int wmain() {
 
   const unsigned int newCharge = ReadBatInfo("0D") ;  // read battery charge level
+  bool PoweredBatt = ReadBatInfo("12");  // read battery power state
   wprintf(L"Initial charge level: %u\n", newCharge);    // print battery charge level
 
 	// get battery device instance path
@@ -164,13 +130,12 @@ int wmain() {
 
     	wprintf(L"New charge level: %u\n", newCharge);
         // toggle between charge and dischage
-        if (newCharge > status.Capacity)
+        if (PoweredBatt) {
             status.PowerState = BATTERY_POWER_ON_LINE | BATTERY_CHARGING; // charging while on AC power
-        else if (newCharge < status.Capacity)
+        }
+        else {
             status.PowerState = BATTERY_DISCHARGING; // discharging
-        else
-            status.PowerState = 0; // same charge as before
-
+        }
         // update charge level
         status.Capacity =newCharge;
 
