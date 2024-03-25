@@ -123,7 +123,7 @@ int wmain() {
 	// get battery device instance path
   wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000";
 
-    wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath);
+  wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath);
 
     std::wstring pdoPath;
 
