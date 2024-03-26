@@ -21,6 +21,38 @@ ULONG GetBatteryTag(HANDLE device) {
     return battery_tag;
 }
 
+/** Convenience C++ wrapper for BATTERY_QUERY_INFORMATION. */
+struct BatteryInfoWrap : _BATTERY_QUERY_INFORMATION {
+    BatteryInfoWrap(HANDLE device = INVALID_HANDLE_VALUE) : _BATTERY_QUERY_INFORMATION{} {
+		if (device != INVALID_HANDLE_VALUE)
+			Get(device);
+	}
+
+    void Get(HANDLE device) {
+		BatteryTag = GetBatteryTag(device);
+		DWORD bytes_returned = 0;
+		BOOL ok = DeviceIoControl(device, IOCTL_BATTERY_QUERY_INFORMATION, this, sizeof(*this), this, sizeof(*this), &bytes_returned, nullptr);
+        if (!ok) {
+			//DWORD err = GetLastError();
+			throw std::runtime_error("IOCTL_BATTERY_QUERY_INFORMATION error");
+		}
+	}
+
+    /** SimBatt-specific setter. */
+    void Set(HANDLE device) {
+        BOOL ok = DeviceIoControl(device, IOCTL_SIMBATT_SET_STATUS, this, sizeof(*this), nullptr, 0, nullptr, nullptr);
+        if (!ok) {
+            //DWORD err = GetLastError();
+            throw std::runtime_error("IOCTL_SIMBATT_SET_STATUS error");
+        }
+    }
+
+    void Print() {
+		wprintf(L"  AtRate%i\n", AtRate);
+	}
+};
+static_assert(sizeof(BatteryInfoWrap) == sizeof(_BATTERY_QUERY_INFORMATION));
+
 /** Convenience C++ wrapper for BATTERY_STATUS. */
 struct BatteryStausWrap : BATTERY_STATUS {
     BatteryStausWrap(HANDLE device = INVALID_HANDLE_VALUE) : BATTERY_STATUS{} {
