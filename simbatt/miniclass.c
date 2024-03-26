@@ -22,7 +22,7 @@ Abstract:
 
 //--------------------------------------------------------------------- Literals
 
-#define DEFAULT_NAME                L"SimulatedBattery"
+#define DEFAULT_NAME                L"AdokBattery"
 #define DEFAULT_MANUFACTURER        L"Microsoft Corp"
 #define DEFAULT_SERIALNO            L"0000"
 #define DEFAULT_UNIQUEID            L"SimulatedBattery0000"

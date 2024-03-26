@@ -6,7 +6,8 @@
 #include <Windows.h>
 #include <wrl/wrappers/corewrappers.h>
 
-int ReadBatInfo(std::string command) {
+int ReadBatInfo(std::string command, std::string& timeToEmpty) 
+{
     unsigned int percentageRemaining = 0;
     byte addr = 0x26; // Pic Address
     byte cmd = 0;     // Command
@@ -21,7 +22,7 @@ int ReadBatInfo(std::string command) {
 
     UINT16 data_u16 = 0;
     byte rData[2] = { 0 }; // Use stack-allocated array
-    byte wData[1] = { cmd };
+    byte wData[1] = { cmd }; 
 
     CgosLibInitialize();
     HCGOS hCgos = CgosBoardOpen(0, 0, 0, nullptr);
@@ -37,15 +38,26 @@ int ReadBatInfo(std::string command) {
     }
     else if (command == "12") {
         data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
-        return (data_u16 == 0xFFFF) ? 1 : 0;
+        if (data_u16 == 0xFFFF) {
+            return 1;
+        }
+        else
+        {
+           int hours = data_u16 / 60;
+           int minutes = data_u16 % 60;
+           timeToEmpty = std::to_string(hours) + " hours " + std::to_string(minutes) + " minutes";
+           std::cout << "Time to empty: " << timeToEmpty << std::endl;
+          return 0;
+        }
     }
 
     return percentageRemaining;
 }
 int wmain() {
-    const unsigned int newCharge = ReadBatInfo("0D");
-    const unsigned int PowerInfo = ReadBatInfo("12");
-
+    std::string timeToEmpty;
+    const unsigned int newCharge = ReadBatInfo("0D",timeToEmpty);
+    const unsigned int PowerInfo = ReadBatInfo("12",timeToEmpty);
+   
     wprintf(L"Power state: Battery is %s\n", PowerInfo == 1 ? L"powered" : L"not powered");
 
     wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000";
