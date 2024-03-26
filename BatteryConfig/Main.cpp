@@ -58,6 +58,7 @@ int wmain() {
     const unsigned int newCharge = ReadBatInfo("0D",timeToEmpty);
     const unsigned int PowerInfo = ReadBatInfo("12",timeToEmpty);
    
+   
     wprintf(L"Power state: Battery is %s\n", PowerInfo == 1 ? L"powered" : L"not powered");
 
     wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000";
@@ -106,7 +107,7 @@ int wmain() {
     // Update charge level
     status.Capacity = newCharge;
 
-    status.Rate = BATTERY_UNKNOWN_RATE;     // was 0
+    status.Rate = '100';     // was 0
     status.Voltage = BATTERY_UNKNOWN_VOLTAGE; // was -1
     status.Set(battery.Get());
 
