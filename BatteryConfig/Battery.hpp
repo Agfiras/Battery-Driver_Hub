@@ -20,7 +20,7 @@ ULONG GetBatteryTag(HANDLE device) {
     }
     return battery_tag;
 }
-
+//this is a test 
 /** Convenience C++ wrapper for BATTERY_QUERY_INFORMATION. */
 struct BatteryInfoWrap : _BATTERY_QUERY_INFORMATION {
     BatteryInfoWrap(HANDLE device = INVALID_HANDLE_VALUE) : _BATTERY_QUERY_INFORMATION{} {
@@ -48,10 +48,11 @@ struct BatteryInfoWrap : _BATTERY_QUERY_INFORMATION {
     }
 
     void Print() {
-		wprintf(L"  AtRate%i\n", AtRate);
+		wprintf(L"AtRate%i\n", AtRate);
 	}
 };
 static_assert(sizeof(BatteryInfoWrap) == sizeof(_BATTERY_QUERY_INFORMATION));
+//this is a test
 
 /** Convenience C++ wrapper for BATTERY_STATUS. */
 struct BatteryStausWrap : BATTERY_STATUS {
