@@ -4,6 +4,8 @@
 #include "../simbatt/simbattdriverif.h"
 #include <string>
 #include <stdexcept>
+#include <iostream>
+#include <iostream>
 
 
 /** Convenience function for getting the battery tag that's needed for some IOCTL calls. */
@@ -21,38 +23,47 @@ ULONG GetBatteryTag(HANDLE device) {
     return battery_tag;
 }
 //this is a test 
-/** Convenience C++ wrapper for BATTERY_QUERY_INFORMATION. */
-struct BatteryInfoWrap : _BATTERY_QUERY_INFORMATION {
-    BatteryInfoWrap(HANDLE device = INVALID_HANDLE_VALUE) : _BATTERY_QUERY_INFORMATION{} {
+struct BatteryRateWrap : _BATTERY_QUERY_INFORMATION {
+    	BatteryRateWrap(HANDLE device = INVALID_HANDLE_VALUE) : _BATTERY_QUERY_INFORMATION{} {
 		if (device != INVALID_HANDLE_VALUE)
 			Get(device);
 	}
 
-    void Get(HANDLE device) {
-		BatteryTag = GetBatteryTag(device);
+	/** Standard getter. */
+	void Get(HANDLE device) {
+        // query BATTERY_STATUS status
+		BATTERY_QUERY_INFORMATION bqi = {};
+		bqi.InformationLevel = BatteryEstimatedTime;
+		bqi.BatteryTag = GetBatteryTag(device);
+        bqi.AtRate = 15;
 		DWORD bytes_returned = 0;
-		BOOL ok = DeviceIoControl(device, IOCTL_BATTERY_QUERY_INFORMATION, this, sizeof(*this), this, sizeof(*this), &bytes_returned, nullptr);
-        if (!ok) {
+		BOOL ok = DeviceIoControl(device, IOCTL_BATTERY_QUERY_INFORMATION, &bqi, sizeof(bqi), this, sizeof(*this), &bytes_returned, nullptr);
+		if (!ok) {
 			//DWORD err = GetLastError();
 			throw std::runtime_error("IOCTL_BATTERY_QUERY_INFORMATION error");
 		}
 	}
 
-    /** SimBatt-specific setter. */
-    void Set(HANDLE device) {
+	/** SimBatt-specific setter. */
+	void Set(HANDLE device) {
+        int point = 0;
         BOOL ok = DeviceIoControl(device, IOCTL_SIMBATT_SET_STATUS, this, sizeof(*this), nullptr, 0, nullptr, nullptr);
         if (!ok) {
-            //DWORD err = GetLastError();
-            throw std::runtime_error("IOCTL_SIMBATT_SET_STATUS error");
-        }
-    }
+			//DWORD err = GetLastError();
+            point = 1;
+            wprintf(L"ERROR: IOCTL_SIMBATT_SET_INFORMATION (err=%i).\n", point);
+           }
+	}
 
-    void Print() {
-		wprintf(L"AtRate%i\n", AtRate);
+	void Print() {
+		wprintf(L"  AtRate%i\n",AtRate);
+        wprintf(L"  BatteryTag=%i\n", BatteryTag);
+        wprintf(L"  InformationLevel=%i\n", InformationLevel);
+
 	}
 };
-static_assert(sizeof(BatteryInfoWrap) == sizeof(_BATTERY_QUERY_INFORMATION));
-//this is a test
+static_assert(sizeof(BatteryRateWrap) == sizeof(_BATTERY_QUERY_INFORMATION));
+//°this is a test
 
 /** Convenience C++ wrapper for BATTERY_STATUS. */
 struct BatteryStausWrap : BATTERY_STATUS {

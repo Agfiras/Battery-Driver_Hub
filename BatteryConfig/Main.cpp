@@ -89,13 +89,11 @@ int wmain() {
         return -1;
     }
 
-    BatteryInfoWrap info(battery.Get());     
-    wprintf(L"\nBattery information:\n");
+    BatteryRateWrap info(battery.Get());     
+    wprintf(L"\nAtRate:\n");
     info.Print();
     wprintf(L"\n");
     
-
-
 
     BatteryStausWrap status(battery.Get());
     wprintf(L"Battery status (before update):\n");
@@ -108,8 +106,9 @@ int wmain() {
     status.PowerState = (PowerInfo == 1) ? BATTERY_POWER_ON_LINE | BATTERY_CHARGING : BATTERY_DISCHARGING;
 
     // Update charge level
-    status.Capacity = newCharge;
-    info.AtRate = 20; 
+    info.AtRate = 20 ; // 20W
+    info.Set(battery.Get());
+    status.Capacity = newCharge; 
     status.Rate = BATTERY_UNKNOWN_RATE;     // was 0
     status.Voltage = BATTERY_UNKNOWN_VOLTAGE; // was -1
     status.Set(battery.Get());
