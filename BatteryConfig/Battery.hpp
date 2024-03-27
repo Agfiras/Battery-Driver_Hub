@@ -22,48 +22,6 @@ ULONG GetBatteryTag(HANDLE device) {
     }
     return battery_tag;
 }
-//this is a test 
-struct BatteryRateWrap : _BATTERY_QUERY_INFORMATION {
-    	BatteryRateWrap(HANDLE device = INVALID_HANDLE_VALUE) : _BATTERY_QUERY_INFORMATION{} {
-		if (device != INVALID_HANDLE_VALUE)
-			Get(device);
-	}
-
-	/** Standard getter. */
-	void Get(HANDLE device) {
-        // query BATTERY_STATUS status
-		BATTERY_QUERY_INFORMATION bqi = {};
-		bqi.InformationLevel = BatteryEstimatedTime;
-		bqi.BatteryTag = GetBatteryTag(device);
-        bqi.AtRate = 15;
-		DWORD bytes_returned = 0;
-		BOOL ok = DeviceIoControl(device, IOCTL_BATTERY_QUERY_INFORMATION, &bqi, sizeof(bqi), this, sizeof(*this), &bytes_returned, nullptr);
-		if (!ok) {
-			//DWORD err = GetLastError();
-			throw std::runtime_error("IOCTL_BATTERY_QUERY_INFORMATION error");
-		}
-	}
-
-	/** SimBatt-specific setter. */
-	void Set(HANDLE device) {
-        int point = 0;
-        BOOL ok = DeviceIoControl(device, IOCTL_SIMBATT_SET_STATUS, this, sizeof(*this), nullptr, 0, nullptr, nullptr);
-        if (!ok) {
-			//DWORD err = GetLastError();
-            point = 1;
-            wprintf(L"ERROR: IOCTL_SIMBATT_SET_INFORMATION (err=%i).\n", point);
-           }
-	}
-
-	void Print() {
-		wprintf(L"  AtRate%i\n",AtRate);
-        wprintf(L"  BatteryTag=%i\n", BatteryTag);
-        wprintf(L"  InformationLevel=%i\n", InformationLevel);
-
-	}
-};
-static_assert(sizeof(BatteryRateWrap) == sizeof(_BATTERY_QUERY_INFORMATION));
-//°this is a test
 
 /** Convenience C++ wrapper for BATTERY_STATUS. */
 struct BatteryStausWrap : BATTERY_STATUS {
@@ -102,7 +60,6 @@ struct BatteryStausWrap : BATTERY_STATUS {
     }
 };
 static_assert(sizeof(BatteryStausWrap) == sizeof(BATTERY_STATUS));
-
 
 /** Convenience C++ wrapper for BATTERY_INFORMATION. */
 struct BatteryInformationWrap : BATTERY_INFORMATION {
@@ -146,3 +103,4 @@ struct BatteryInformationWrap : BATTERY_INFORMATION {
     }
 };
 static_assert(sizeof(BatteryInformationWrap) == sizeof(BATTERY_INFORMATION));
+
