@@ -102,7 +102,7 @@ int wmain() {
 
     // Update charge level
     status.Capacity = newCharge; 
-    status.Rate = BATTERY_UNKNOWN_RATE;     // was 0
+    status.Rate = 50;     // was 0
     status.Voltage = BATTERY_UNKNOWN_VOLTAGE; // was -1
     status.Set(battery.Get());
 
