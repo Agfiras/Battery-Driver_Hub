@@ -100,10 +100,10 @@ int wmain() {
     // Toggle between charge and discharge
     status.PowerState = (PowerInfo == 1) ? BATTERY_POWER_ON_LINE | BATTERY_CHARGING : BATTERY_DISCHARGING;
 
-    // Update charge level
+   
     status.Capacity = newCharge; 
-    status.Rate = 50;     // was 0
-    status.Voltage = BATTERY_UNKNOWN_VOLTAGE; // was -1
+    status.Rate = 95; // 95W
+    status.Voltage = 19;    // 19V
     status.Set(battery.Get());
 
     return 0;
