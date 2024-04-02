@@ -31,9 +31,9 @@ Abstract:
 
 _IRQL_requires_same_
 VOID
-SimBattUpdateTag (
+SimBattUpdateTag(
     _Inout_ PSIMBATT_FDO_DATA DevExt
-    );
+);
 
 BCLASS_QUERY_TAG_CALLBACK SimBattQueryTag;
 BCLASS_QUERY_INFORMATION_CALLBACK SimBattQueryInformation;
@@ -43,75 +43,75 @@ BCLASS_SET_STATUS_NOTIFY_CALLBACK SimBattSetStatusNotify;
 BCLASS_DISABLE_STATUS_NOTIFY_CALLBACK SimBattDisableStatusNotify;
 
 _Must_inspect_result_
-_Success_(return==STATUS_SUCCESS)
+_Success_(return == STATUS_SUCCESS)
 NTSTATUS
-SimBattSetBatteryStatus (
+SimBattSetBatteryStatus(
     _In_ WDFDEVICE Device,
     _In_ PBATTERY_STATUS BatteryStatus
-    );
+);
 
 _Must_inspect_result_
-_Success_(return==STATUS_SUCCESS)
+_Success_(return == STATUS_SUCCESS)
 NTSTATUS
-SimBattSetBatteryInformation (
+SimBattSetBatteryInformation(
     _In_ WDFDEVICE Device,
     _In_ PBATTERY_INFORMATION BatteryInformation
-    );
+);
 
 _Must_inspect_result_
-_Success_(return==STATUS_SUCCESS)
+_Success_(return == STATUS_SUCCESS)
 NTSTATUS
-SimBattSetBatteryManufactureDate (
+SimBattSetBatteryManufactureDate(
     _In_ WDFDEVICE Device,
     _In_ PBATTERY_MANUFACTURE_DATE ManufactureDate
-    );
+);
 
 _Must_inspect_result_
-_Success_(return==STATUS_SUCCESS)
+_Success_(return == STATUS_SUCCESS)
 NTSTATUS
-SimBattSetBatteryGranularityScale (
+SimBattSetBatteryGranularityScale(
     _In_ WDFDEVICE Device,
     _In_reads_(ScaleCount) PBATTERY_REPORTING_SCALE Scale,
     _In_ ULONG ScaleCount
-    );
+);
 
 _Must_inspect_result_
-_Success_(return==STATUS_SUCCESS)
+_Success_(return == STATUS_SUCCESS)
 NTSTATUS
-SimBattSetBatteryEstimatedTime (
+SimBattSetBatteryEstimatedTime(
     _In_ WDFDEVICE Device,
     _In_ ULONG EstimatedTime
-    );
+);
 
 _Must_inspect_result_
-_Success_(return==STATUS_SUCCESS)
+_Success_(return == STATUS_SUCCESS)
 NTSTATUS
-SimBattSetBatteryTemperature (
+SimBattSetBatteryTemperature(
     _In_ WDFDEVICE Device,
     _In_ ULONG Temperature
-    );
+);
 
-_Success_(return==STATUS_SUCCESS)
+_Success_(return == STATUS_SUCCESS)
 NTSTATUS
-SimBattSetBatteryString (
+SimBattSetBatteryString(
     _In_ PCWSTR String,
     _Out_writes_(MAX_BATTERY_STRING_SIZE) PWCHAR Destination
-    );
+);
 
 _Must_inspect_result_
-_Success_(return==STATUS_SUCCESS)
+_Success_(return == STATUS_SUCCESS)
 NTSTATUS
-SimBattGetBatteryMaxChargingCurrent (
+SimBattGetBatteryMaxChargingCurrent(
     _In_ WDFDEVICE Device,
     _Out_ PULONG MaxChargingCurrent
-    );
+);
 
-_Success_(return==STATUS_SUCCESS)
+_Success_(return == STATUS_SUCCESS)
 NTSTATUS
-SaveSimBattStateToRegistry (
+SaveSimBattStateToRegistry(
     _In_ WDFDEVICE Device,
     _In_ PSIMBATT_STATE State
-    );
+);
 
 //---------------------------------------------------------------------- Pragmas
 
@@ -138,9 +138,9 @@ SaveSimBattStateToRegistry (
 
 _Use_decl_annotations_
 VOID
-SimBattPrepareHardware (
+SimBattPrepareHardware(
     WDFDEVICE Device
-    )
+)
 
 /*++
 
@@ -177,23 +177,21 @@ Return Value:
         WdfWaitLockAcquire(DevExt->StateLock, NULL);
         SimBattUpdateTag(DevExt);
         DevExt->State.Version = SIMBATT_STATE_VERSION;
-        DevExt->State.BatteryStatus.PowerState = BATTERY_POWER_ON_LINE;
+        DevExt->State.BatteryStatus.PowerState = BATTERY_DISCHARGING;
         DevExt->State.BatteryStatus.Capacity = 100;
-        DevExt->State.BatteryStatus.Voltage = BATTERY_UNKNOWN_VOLTAGE;
-        DevExt->State.BatteryStatus.Rate = 0;
+        DevExt->State.BatteryStatus.Voltage = 19;
+        DevExt->State.BatteryStatus.Rate = 95;
         DevExt->State.BatteryInfo.Capabilities = BATTERY_SYSTEM_BATTERY;
         DevExt->State.BatteryInfo.Technology = 1;
-        DevExt->State.BatteryInfo.Chemistry[0] = 'F';
         DevExt->State.BatteryInfo.DesignedCapacity = 100;
         DevExt->State.BatteryInfo.FullChargedCapacity = 100;
         DevExt->State.BatteryInfo.DefaultAlert1 = 0;
-        DevExt->State.BatteryInfo.DefaultAlert2 = 0;
         DevExt->State.BatteryInfo.CriticalBias = 0;
         DevExt->State.BatteryInfo.CycleCount = 100;
         DevExt->State.MaxCurrentDraw = UNKNOWN_CURRENT;
         SimBattSetBatteryString(DEFAULT_NAME, DevExt->State.DeviceName);
         SimBattSetBatteryString(DEFAULT_MANUFACTURER,
-                                DevExt->State.ManufacturerName);
+            DevExt->State.ManufacturerName);
 
         SimBattSetBatteryString(DEFAULT_SERIALNO, DevExt->State.SerialNumber);
         SimBattSetBatteryString(DEFAULT_UNIQUEID, DevExt->State.UniqueId);
@@ -213,9 +211,9 @@ Return Value:
 
 _Use_decl_annotations_
 VOID
-SimBattUpdateTag (
+SimBattUpdateTag(
     PSIMBATT_FDO_DATA DevExt
-    )
+)
 
 /*++
 
@@ -249,10 +247,10 @@ Return Value:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattQueryTag (
+SimBattQueryTag(
     PVOID Context,
     PULONG BatteryTag
-    )
+)
 
 /*++
 
@@ -285,7 +283,8 @@ Return Value:
     WdfWaitLockRelease(DevExt->StateLock);
     if (*BatteryTag == BATTERY_TAG_INVALID) {
         Status = STATUS_NO_SUCH_DEVICE;
-    } else {
+    }
+    else {
         Status = STATUS_SUCCESS;
     }
 
@@ -295,7 +294,7 @@ Return Value:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattQueryInformation (
+SimBattQueryInformation(
     PVOID Context,
     ULONG BatteryTag,
     BATTERY_QUERY_INFORMATION_LEVEL Level,
@@ -303,7 +302,7 @@ SimBattQueryInformation (
     PVOID Buffer,
     ULONG BufferLength,
     PULONG ReturnedLength
-    )
+)
 
 /*++
 
@@ -345,8 +344,7 @@ Return Value:
     PVOID ReturnBuffer;
     size_t ReturnBufferLength;
     NTSTATUS Status;
-
-    UNREFERENCED_PARAMETER(AtRate);
+    //UNREFERENCED_PARAMETER(AtRate);
 
     DebugEnter();
     PAGED_CODE();
@@ -377,6 +375,7 @@ Return Value:
         break;
 
     case BatteryEstimatedTime:
+        AtRate = -90;
         if (DevExt->State.EstimatedTime == SIMBATT_RATE_CALCULATE) {
             if (AtRate == 0) {
                 AtRate = DevExt->State.BatteryStatus.Rate;
@@ -384,13 +383,15 @@ Return Value:
 
             if (AtRate < 0) {
                 ResultValue = (3600 * DevExt->State.BatteryStatus.Capacity) /
-                                (-AtRate);
+                    (-AtRate);
 
-            } else {
+            }
+            else {
                 ResultValue = BATTERY_UNKNOWN_TIME;
             }
 
-        } else {
+        }
+        else {
             ResultValue = DevExt->State.EstimatedTime;
         }
 
@@ -402,8 +403,8 @@ Return Value:
     case BatteryUniqueID:
         ReturnBuffer = DevExt->State.UniqueId;
         Status = RtlStringCbLengthW(DevExt->State.UniqueId,
-                                    sizeof(DevExt->State.UniqueId),
-                                    &ReturnBufferLength);
+            sizeof(DevExt->State.UniqueId),
+            &ReturnBufferLength);
 
         ReturnBufferLength += sizeof(WCHAR);
         break;
@@ -411,8 +412,8 @@ Return Value:
     case BatteryManufactureName:
         ReturnBuffer = DevExt->State.ManufacturerName;
         Status = RtlStringCbLengthW(DevExt->State.ManufacturerName,
-                                    sizeof(DevExt->State.ManufacturerName),
-                                    &ReturnBufferLength);
+            sizeof(DevExt->State.ManufacturerName),
+            &ReturnBufferLength);
 
         ReturnBufferLength += sizeof(WCHAR);
         break;
@@ -420,8 +421,8 @@ Return Value:
     case BatteryDeviceName:
         ReturnBuffer = DevExt->State.DeviceName;
         Status = RtlStringCbLengthW(DevExt->State.DeviceName,
-                                    sizeof(DevExt->State.DeviceName),
-                                    &ReturnBufferLength);
+            sizeof(DevExt->State.DeviceName),
+            &ReturnBufferLength);
 
         ReturnBufferLength += sizeof(WCHAR);
         break;
@@ -429,8 +430,8 @@ Return Value:
     case BatterySerialNumber:
         ReturnBuffer = DevExt->State.SerialNumber;
         Status = RtlStringCbLengthW(DevExt->State.SerialNumber,
-                                    sizeof(DevExt->State.SerialNumber),
-                                    &ReturnBufferLength);
+            sizeof(DevExt->State.SerialNumber),
+            &ReturnBufferLength);
 
         ReturnBufferLength += sizeof(WCHAR);
         break;
@@ -448,7 +449,7 @@ Return Value:
         if (DevExt->State.GranularityCount > 0) {
             ReturnBuffer = DevExt->State.GranularityScale;
             ReturnBufferLength = DevExt->State.GranularityCount *
-                                    sizeof(BATTERY_REPORTING_SCALE);
+                sizeof(BATTERY_REPORTING_SCALE);
 
             Status = STATUS_SUCCESS;
         }
@@ -467,7 +468,7 @@ Return Value:
     }
 
     NT_ASSERT(((ReturnBufferLength == 0) && (ReturnBuffer == NULL)) ||
-              ((ReturnBufferLength > 0)  && (ReturnBuffer != NULL)));
+        ((ReturnBufferLength > 0) && (ReturnBuffer != NULL)));
 
     if (NT_SUCCESS(Status)) {
         *ReturnedLength = (ULONG)ReturnBufferLength;
@@ -475,12 +476,14 @@ Return Value:
             if ((Buffer == NULL) || (BufferLength < ReturnBufferLength)) {
                 Status = STATUS_BUFFER_TOO_SMALL;
 
-            } else {
+            }
+            else {
                 memcpy(Buffer, ReturnBuffer, ReturnBufferLength);
             }
         }
 
-    } else {
+    }
+    else {
         *ReturnedLength = 0;
     }
 
@@ -492,11 +495,11 @@ QueryInformationEnd:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattQueryStatus (
+SimBattQueryStatus(
     PVOID Context,
     ULONG BatteryTag,
     PBATTERY_STATUS BatteryStatus
-    )
+)
 
 /*++
 
@@ -537,8 +540,8 @@ Return Value:
     }
 
     RtlCopyMemory(BatteryStatus,
-                  &DevExt->State.BatteryStatus,
-                  sizeof(BATTERY_STATUS));
+        &DevExt->State.BatteryStatus,
+        sizeof(BATTERY_STATUS));
 
     Status = STATUS_SUCCESS;
 
@@ -550,11 +553,11 @@ QueryStatusEnd:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattSetStatusNotify (
+SimBattSetStatusNotify(
     PVOID Context,
     ULONG BatteryTag,
     PBATTERY_NOTIFY BatteryNotify
-    )
+)
 
 /*++
 
@@ -607,9 +610,9 @@ SetStatusNotifyEnd:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattDisableStatusNotify (
+SimBattDisableStatusNotify(
     PVOID Context
-    )
+)
 
 /*++
 
@@ -645,12 +648,12 @@ Return Value:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattSetInformation (
+SimBattSetInformation(
     PVOID Context,
     ULONG BatteryTag,
     BATTERY_SET_INFORMATION_LEVEL Level,
     PVOID Buffer
-    )
+)
 
 /*
  Routine Description:
@@ -692,15 +695,17 @@ Return Value:
     if (Buffer == NULL) {
         Status = STATUS_INVALID_PARAMETER_4;
 
-    } else if (Level == BatteryChargingSource) {
+    }
+    else if (Level == BatteryChargingSource) {
         ChargingSource = (PBATTERY_CHARGING_SOURCE)Buffer;
         DevExt->State.MaxCurrentDraw = ChargingSource->MaxCurrent;
         DebugPrint(SIMBATT_INFO,
-                   "SimBatt : Set MaxCurrentDraw = %u mA\n",
-                   DevExt->State.MaxCurrentDraw);
+            "SimBatt : Set MaxCurrentDraw = %u mA\n",
+            DevExt->State.MaxCurrentDraw);
 
         Status = STATUS_SUCCESS;
-    } else {
+    }
+    else {
         Status = STATUS_NOT_SUPPORTED;
     }
 
@@ -719,13 +724,13 @@ SetInformationEnd:
 //
 
 VOID
-SimBattIoDeviceControl (
+SimBattIoDeviceControl(
     WDFQUEUE Queue,
     WDFREQUEST Request,
     size_t OutputBufferLength,
     size_t InputBufferLength,
     ULONG IoControlCode
-    )
+)
 
 /*++
 
@@ -787,9 +792,9 @@ Return Value:
     switch (IoControlCode) {
     case IOCTL_SIMBATT_SET_STATUS:
         TempStatus = WdfRequestRetrieveInputBuffer(Request,
-                                                   sizeof(BATTERY_STATUS),
-                                                   &BatteryStatus,
-                                                   &Length);
+            sizeof(BATTERY_STATUS),
+            &BatteryStatus,
+            &Length);
 
         if (NT_SUCCESS(TempStatus) && (Length == sizeof(BATTERY_STATUS))) {
             Status = SimBattSetBatteryStatus(Device, BatteryStatus);
@@ -799,9 +804,9 @@ Return Value:
 
     case IOCTL_SIMBATT_SET_INFORMATION:
         TempStatus = WdfRequestRetrieveInputBuffer(Request,
-                                                   sizeof(BATTERY_INFORMATION),
-                                                   &BatteryInformation,
-                                                   &Length);
+            sizeof(BATTERY_INFORMATION),
+            &BatteryInformation,
+            &Length);
 
         if (NT_SUCCESS(TempStatus) && (Length == sizeof(BATTERY_INFORMATION))) {
             Status = SimBattSetBatteryInformation(Device, BatteryInformation);
@@ -811,13 +816,13 @@ Return Value:
 
     case IOCTL_SIMBATT_GET_MAXCHARGINGCURRENT:
         TempStatus = WdfRequestRetrieveOutputBuffer(Request,
-                                                    sizeof(*MaxCurrentDraw),
-                                                    &MaxCurrentDraw,
-                                                    &Length);
+            sizeof(*MaxCurrentDraw),
+            &MaxCurrentDraw,
+            &Length);
 
         if (NT_SUCCESS(TempStatus) && (Length == sizeof(ULONG))) {
             Status = SimBattGetBatteryMaxChargingCurrent(Device,
-                                                         MaxCurrentDraw);
+                MaxCurrentDraw);
 
             if (NT_SUCCESS(Status)) {
                 BytesReturned = sizeof(*MaxCurrentDraw);
@@ -828,10 +833,10 @@ Return Value:
 
     case IOCTL_SIMBATT_SET_MANUFACTURE_DATE:
         TempStatus = WdfRequestRetrieveInputBuffer(
-                         Request,
-                         sizeof(BATTERY_MANUFACTURE_DATE),
-                         &ManufactureDate,
-                         &Length);
+            Request,
+            sizeof(BATTERY_MANUFACTURE_DATE),
+            &ManufactureDate,
+            &Length);
 
         if (NT_SUCCESS(TempStatus) &&
             (Length == sizeof(BATTERY_MANUFACTURE_DATE))) {
@@ -843,9 +848,9 @@ Return Value:
 
     case IOCTL_SIMBATT_SET_TEMPERATURE:
         TempStatus = WdfRequestRetrieveInputBuffer(Request,
-                                                   sizeof(ULONG),
-                                                   &Temperature,
-                                                   &Length);
+            sizeof(ULONG),
+            &Temperature,
+            &Length);
 
         if (NT_SUCCESS(TempStatus) && (Length == sizeof(ULONG))) {
             Status = SimBattSetBatteryTemperature(Device, *Temperature);
@@ -855,9 +860,9 @@ Return Value:
 
     case IOCTL_SIMBATT_SET_ESTIMATED_TIME:
         TempStatus = WdfRequestRetrieveInputBuffer(Request,
-                                                   sizeof(ULONG),
-                                                   &EstimatedRunTime,
-                                                   &Length);
+            sizeof(ULONG),
+            &EstimatedRunTime,
+            &Length);
 
         if (NT_SUCCESS(TempStatus) && (Length == sizeof(ULONG))) {
             Status = SimBattSetBatteryEstimatedTime(Device, *EstimatedRunTime);
@@ -867,20 +872,20 @@ Return Value:
 
     case IOCTL_SIMBATT_SET_GRANULARITY_INFORMATION:
         GranularityEntries = (ULONG)(InputBufferLength /
-                                     sizeof(PBATTERY_REPORTING_SCALE));
+            sizeof(PBATTERY_REPORTING_SCALE));
 
         TempStatus = WdfRequestRetrieveInputBuffer(
-                         Request,
-                         GranularityEntries * sizeof(PBATTERY_REPORTING_SCALE),
-                         &GranularityScale,
-                         &Length);
+            Request,
+            GranularityEntries * sizeof(PBATTERY_REPORTING_SCALE),
+            &GranularityScale,
+            &Length);
 
         if (NT_SUCCESS(TempStatus) &&
             (Length == GranularityEntries * sizeof(PBATTERY_REPORTING_SCALE))) {
 
             Status = SimBattSetBatteryGranularityScale(Device,
-                                                       GranularityScale,
-                                                       GranularityEntries);
+                GranularityScale,
+                GranularityEntries);
         }
 
         break;
@@ -889,10 +894,10 @@ Return Value:
     case IOCTL_SIMBATT_SET_MANUFACTURE_NAME:
     case IOCTL_SIMBATT_SET_SERIAL_NUMBER:
     case IOCTL_SIMBATT_SET_UNIQUE_ID:
-            TempStatus = WdfRequestRetrieveInputBuffer(Request,
-                                                       sizeof(WCHAR),
-                                                       &String,
-                                                       &Length);
+        TempStatus = WdfRequestRetrieveInputBuffer(Request,
+            sizeof(WCHAR),
+            &String,
+            &Length);
 
         if (NT_SUCCESS(TempStatus) &&
             (Length % sizeof(WCHAR) == 0) &&
@@ -930,7 +935,7 @@ Return Value:
             // Supress invalid failure: Redundant Pointer Test on DestinationString
             //
 
-            #pragma warning(suppress: 28922)
+#pragma warning(suppress: 28922)
             if (DestinationString != NULL) {
                 WdfWaitLockAcquire(DevExt->StateLock, NULL);
                 SimBattUpdateTag(DevExt);
@@ -954,10 +959,10 @@ Return Value:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattSetBatteryStatus (
+SimBattSetBatteryStatus(
     WDFDEVICE Device,
     PBATTERY_STATUS BatteryStatus
-    )
+)
 
 /*++
 
@@ -988,9 +993,9 @@ Return Value:
     Status = STATUS_INVALID_PARAMETER;
     DevExt = GetDeviceExtension(Device);
     ValidPowerState = BATTERY_CHARGING |
-                      BATTERY_DISCHARGING |
-                      BATTERY_CRITICAL |
-                      BATTERY_POWER_ON_LINE;
+        BATTERY_DISCHARGING |
+        BATTERY_CRITICAL |
+        BATTERY_POWER_ON_LINE;
 
     if ((BatteryStatus->PowerState & ~ValidPowerState) != 0) {
         goto SetBatteryStatusEnd;
@@ -1011,10 +1016,10 @@ SetBatteryStatusEnd:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattSetBatteryInformation (
+SimBattSetBatteryInformation(
     WDFDEVICE Device,
     PBATTERY_INFORMATION BatteryInformation
-    )
+)
 
 /*++
 
@@ -1045,8 +1050,8 @@ Return Value:
     Status = STATUS_INVALID_PARAMETER;
     DevExt = GetDeviceExtension(Device);
     ValidCapabilities = BATTERY_CAPACITY_RELATIVE |
-                        BATTERY_IS_SHORT_TERM |
-                        BATTERY_SYSTEM_BATTERY;
+        BATTERY_IS_SHORT_TERM |
+        BATTERY_SYSTEM_BATTERY;
 
     if ((BatteryInformation->Capabilities & ~ValidCapabilities) != 0) {
         goto SetBatteryInformationEnd;
@@ -1092,10 +1097,10 @@ SetBatteryInformationEnd:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattSetBatteryManufactureDate (
+SimBattSetBatteryManufactureDate(
     WDFDEVICE Device,
     PBATTERY_MANUFACTURE_DATE ManufactureDate
-    )
+)
 
 /*++
 
@@ -1139,7 +1144,8 @@ Return Value:
             goto SetBatteryManufactureDateEnd;
         }
 
-    } else {
+    }
+    else {
 
         //
         // Make sure the dates are close to reasonable.
@@ -1166,11 +1172,11 @@ SetBatteryManufactureDateEnd:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattSetBatteryGranularityScale (
+SimBattSetBatteryGranularityScale(
     WDFDEVICE Device,
     PBATTERY_REPORTING_SCALE Scale,
     ULONG ScaleCount
-    )
+)
 
 /*++
 
@@ -1237,10 +1243,10 @@ SetBatteryGranularityScaleEnd:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattSetBatteryEstimatedTime (
+SimBattSetBatteryEstimatedTime(
     WDFDEVICE Device,
     ULONG EstimatedTime
-    )
+)
 
 /*++
 
@@ -1278,10 +1284,10 @@ Return Value:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattSetBatteryTemperature (
+SimBattSetBatteryTemperature(
     WDFDEVICE Device,
     ULONG Temperature
-    )
+)
 
 /*++
 
@@ -1316,10 +1322,10 @@ Return Value:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattSetBatteryString (
+SimBattSetBatteryString(
     PCWSTR String,
     PWCHAR Destination
-    )
+)
 
 /*++
 
@@ -1348,10 +1354,10 @@ Return Value:
 
 _Use_decl_annotations_
 NTSTATUS
-SimBattGetBatteryMaxChargingCurrent (
+SimBattGetBatteryMaxChargingCurrent(
     WDFDEVICE Device,
     PULONG MaxChargingCurrent
-    )
+)
 
 /*
  Routine Description:
@@ -1387,10 +1393,10 @@ Return Value:
 
 _Use_decl_annotations_
 NTSTATUS
-SaveSimBattStateToRegistry (
+SaveSimBattStateToRegistry(
     WDFDEVICE Device,
     PSIMBATT_STATE State
-    )
+)
 
 /*
  Routine Description:
@@ -1423,9 +1429,9 @@ Return Value:
         KEY_WRITE,
         NULL,
         &KeyHandle
-        );
+    );
 
-    if (!NT_SUCCESS (Status)) {
+    if (!NT_SUCCESS(Status)) {
         goto SaveSimBattStateToRegistryEnd;
     }
 
@@ -1435,10 +1441,10 @@ Return Value:
         REG_BINARY,
         sizeof(SIMBATT_STATE),
         State
-        );
+    );
 
     WdfRegistryClose(KeyHandle);
-    if (!NT_SUCCESS (Status)) {
+    if (!NT_SUCCESS(Status)) {
         goto SaveSimBattStateToRegistryEnd;
     }
 
@@ -1448,11 +1454,11 @@ SaveSimBattStateToRegistryEnd:
 
 _Use_decl_annotations_
 VOID
-SimBattPrint (
+SimBattPrint(
     ULONG Level,
     PCSTR Format,
     ...
-    )
+)
 
 /*++
 
@@ -1474,7 +1480,7 @@ Return Value:
 
 {
 
-	va_list Arglist;
-	va_start(Arglist, Format);
-	vDbgPrintEx(DPFLTR_IHVDRIVER_ID, Level, Format, Arglist);
+    va_list Arglist;
+    va_start(Arglist, Format);
+    vDbgPrintEx(DPFLTR_IHVDRIVER_ID, Level, Format, Arglist);
 }

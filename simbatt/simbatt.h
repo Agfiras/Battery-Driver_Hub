@@ -63,6 +63,8 @@ Abstract:
 
 //------------------------------------------------------------------ Definitions
 
+
+
 typedef struct {
     UNICODE_STRING                  RegistryPath;
 } SIMBATT_GLOBAL_DATA, *PSIMBATT_GLOBAL_DATA;

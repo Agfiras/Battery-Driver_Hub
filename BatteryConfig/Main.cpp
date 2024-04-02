@@ -8,13 +8,13 @@
 
 int ReadBatInfo(std::string command, std::string& timeToEmpty) 
 {
-    unsigned int percentageRemaining = 0;
+    unsigned int percentageRemaining = 0;   
     byte addr = 0x26; // Pic Address
     byte cmd = 0;     // Command
 
     try {
-        addr = std::stoi("26", nullptr, 16);
-        cmd = std::stoi(command, nullptr, 16);
+        addr = std::stoi("26", nullptr, 16);    // Convert hex string to integer
+        cmd = std::stoi(command, nullptr, 16);  // Convert hex string to integer
     }
     catch (const std::exception&) {
         std::cerr << "Invalid argument: " << command << std::endl;
@@ -25,16 +25,16 @@ int ReadBatInfo(std::string command, std::string& timeToEmpty)
     byte wData[1] = { cmd }; 
 
     CgosLibInitialize();
-    HCGOS hCgos = CgosBoardOpen(0, 0, 0, nullptr);
+    HCGOS hCgos = CgosBoardOpen(0, 0, 0, nullptr);  // Open the first CGOS board
     try {
-        CgosI2CWriteReadCombined(hCgos, 0, addr, wData, 1, rData, 2);
+        CgosI2CWriteReadCombined(hCgos, 0, addr, wData, 1, rData, 2);   
     }
     catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
 
     if (command == "0D") {
-        percentageRemaining = rData[0];
+        percentageRemaining = rData[0];     // Battery percentage remaining
     }
     else if (command == "12") {
         data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
@@ -46,7 +46,7 @@ int ReadBatInfo(std::string command, std::string& timeToEmpty)
            int hours = data_u16 / 60;
            int minutes = data_u16 % 60;
            timeToEmpty = std::to_string(hours) + " hours " + std::to_string(minutes) + " minutes";
-           std::cout << "Time to empty: " << timeToEmpty << std::endl;
+           std::cout << "Time to empty: " << timeToEmpty << std::endl; 
           return 0;
         }
     }
@@ -54,6 +54,7 @@ int ReadBatInfo(std::string command, std::string& timeToEmpty)
     return percentageRemaining;
 }
 int wmain() {
+    while (true) {
     std::string timeToEmpty;
     const unsigned int newCharge = ReadBatInfo("0D",timeToEmpty);
     const unsigned int PowerInfo = ReadBatInfo("12",timeToEmpty);
@@ -61,7 +62,7 @@ int wmain() {
    
     wprintf(L"Power state: Battery is %s\n", PowerInfo == 1 ? L"powered" : L"not powered");
 
-    wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000";
+    wchar_t deviceInstancePath[18] = L"SWD\\DEVGEN\\1";
     wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath);
 
     std::wstring pdoPath;
@@ -88,7 +89,13 @@ int wmain() {
         wprintf(L"ERROR: CreateFileW (err=%i).\n", err);
         return -1;
     }
-    
+
+
+    BatteryInformationWrap RateWrap(battery.Get());
+    wprintf(L"Battery information:\n");
+    RateWrap.Print();
+    wprintf(L"\n");
+
 
     BatteryStausWrap status(battery.Get());
     wprintf(L"Battery status (before update):\n");
@@ -100,11 +107,15 @@ int wmain() {
     // Toggle between charge and discharge
     status.PowerState = (PowerInfo == 1) ? BATTERY_POWER_ON_LINE | BATTERY_CHARGING : BATTERY_DISCHARGING;
 
-   
+    RateWrap.AtRate = -6; // 0 minutes
+    //RateWrap.Set(battery.Get()); // Set the new rate)
     status.Capacity = newCharge; 
-    status.Rate = 95; // 95W
+    status.Rate = 30; // 95W
     status.Voltage = 19;    // 19V
-    status.Set(battery.Get());
+    status.Set(battery.Get()); // Set the new status
 
+    Sleep(5000);
+
+    }
     return 0;
 }

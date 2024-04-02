@@ -1,22 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\",
+  "WorkspaceRootPath": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\simbatt.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|solutionrelative:simbatt.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\miniclass.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|solutionrelative:miniclass.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\simbattdriverif.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\simbattdriverif.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|solutionrelative:simbattdriverif.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\wdf.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|solutionrelative:wdf.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\batclass_prepublish.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|solutionrelative:batclass_prepublish.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\batclass_prepublish.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|solutionrelative:batclass_prepublish.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\simbatt.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|solutionrelative:simbatt.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\wdf.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49F35704-9A04-4CCF-A290-BBE79906C901}|simbatt.vcxproj|solutionrelative:wdf.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,28 +30,64 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 6,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "wdf.c",
-              "DocumentMoniker": "C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\wdf.c",
-              "RelativeDocumentMoniker": "wdf.c",
-              "ToolTip": "C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\wdf.c",
-              "RelativeToolTip": "wdf.c",
-              "ViewState": "AQIAACAAAAAAAAAAAAAowIcAAAASAAAA",
+              "DocumentIndex": 0,
+              "Title": "miniclass.c",
+              "DocumentMoniker": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\miniclass.c",
+              "RelativeDocumentMoniker": "miniclass.c",
+              "ToolTip": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\miniclass.c",
+              "RelativeToolTip": "miniclass.c",
+              "ViewState": "AQIAAI0AAAAAAAAAAAAAALUAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2024-03-12T10:37:08.903Z",
+              "WhenOpened": "2024-04-02T14:39:11.137Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
+              "Title": "wdf.c",
+              "DocumentMoniker": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\wdf.c",
+              "RelativeDocumentMoniker": "wdf.c",
+              "ToolTip": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\wdf.c",
+              "RelativeToolTip": "wdf.c",
+              "ViewState": "AQIAACAAAAAAAAAAAAAowIcAAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2024-03-12T10:37:08.903Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "batclass_prepublish.h",
-              "DocumentMoniker": "C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\batclass_prepublish.h",
+              "DocumentMoniker": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\batclass_prepublish.h",
               "RelativeDocumentMoniker": "batclass_prepublish.h",
-              "ToolTip": "C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\batclass_prepublish.h",
+              "ToolTip": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\batclass_prepublish.h",
               "RelativeToolTip": "batclass_prepublish.h",
               "ViewState": "AQIAADMAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
@@ -56,13 +96,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "simbatt.h",
-              "DocumentMoniker": "C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\simbatt.h",
+              "DocumentMoniker": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\simbatt.h",
               "RelativeDocumentMoniker": "simbatt.h",
-              "ToolTip": "C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\simbatt.h",
+              "ToolTip": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\simbatt.h",
               "RelativeToolTip": "simbatt.h",
-              "ViewState": "AQIAAHsAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-03-12T10:34:16.792Z",
               "EditorCaption": ""
@@ -71,9 +111,9 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "simbattdriverif.h",
-              "DocumentMoniker": "C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\simbattdriverif.h",
+              "DocumentMoniker": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\simbattdriverif.h",
               "RelativeDocumentMoniker": "simbattdriverif.h",
-              "ToolTip": "C:\\Users\\ageng\\OneDrive\\Documents\\GitHub\\Battery-Driver_Hub\\simbatt\\simbattdriverif.h",
+              "ToolTip": "C:\\Users\\Adok\\source\\repos\\Agfiras\\Battery-Driver_Hub\\simbatt\\simbattdriverif.h",
               "RelativeToolTip": "simbattdriverif.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
