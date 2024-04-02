@@ -376,7 +376,7 @@ Return Value:
 
     case BatteryEstimatedTime:
         AtRate = -90;
-        if (DevExt->State.EstimatedTime == SIMBATT_RATE_CALCULATE) {
+       
             if (AtRate == 0) {
                 AtRate = DevExt->State.BatteryStatus.Rate;
             }
@@ -390,10 +390,7 @@ Return Value:
                 ResultValue = BATTERY_UNKNOWN_TIME;
             }
 
-        }
-        else {
-            ResultValue = DevExt->State.EstimatedTime;
-        }
+        
 
         ReturnBuffer = &ResultValue;
         ReturnBufferLength = sizeof(ResultValue);
