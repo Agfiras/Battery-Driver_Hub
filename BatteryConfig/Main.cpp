@@ -110,8 +110,8 @@ int wmain() {
     RateWrap.AtRate = -6; // 0 minutes
     //RateWrap.Set(battery.Get()); // Set the new rate)
     status.Capacity = newCharge; 
-    status.Rate = 30; // 95W
-    status.Voltage = 19;    // 19V
+    status.Rate = -30; // 95W
+    status.Voltage = 14;    // 19V
     status.Set(battery.Get()); // Set the new status
 
     Sleep(5000);

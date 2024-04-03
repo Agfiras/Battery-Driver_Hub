@@ -23,7 +23,7 @@ Abstract:
 //--------------------------------------------------------------------- Literals
 
 #define DEFAULT_NAME                L"AdokBattery"
-#define DEFAULT_MANUFACTURER        L"Microsoft Corp"
+#define DEFAULT_MANUFACTURER        L"Adok"
 #define DEFAULT_SERIALNO            L"0000"
 #define DEFAULT_UNIQUEID            L"SimulatedBattery0000"
 
@@ -177,18 +177,18 @@ Return Value:
         WdfWaitLockAcquire(DevExt->StateLock, NULL);
         SimBattUpdateTag(DevExt);
         DevExt->State.Version = SIMBATT_STATE_VERSION;
-        DevExt->State.BatteryStatus.PowerState = BATTERY_DISCHARGING;
         DevExt->State.BatteryStatus.Capacity = 100;
-        DevExt->State.BatteryStatus.Voltage = 19;
+        DevExt->State.BatteryStatus.Voltage = 14000;
         DevExt->State.BatteryStatus.Rate = 95;
         DevExt->State.BatteryInfo.Capabilities = BATTERY_SYSTEM_BATTERY;
         DevExt->State.BatteryInfo.Technology = 1;
+        DevExt->State.BatteryInfo.Chemistry[3];
         DevExt->State.BatteryInfo.DesignedCapacity = 100;
         DevExt->State.BatteryInfo.FullChargedCapacity = 100;
         DevExt->State.BatteryInfo.DefaultAlert1 = 0;
         DevExt->State.BatteryInfo.CriticalBias = 0;
         DevExt->State.BatteryInfo.CycleCount = 100;
-        DevExt->State.MaxCurrentDraw = UNKNOWN_CURRENT;
+        DevExt->State.MaxCurrentDraw = 5;
         SimBattSetBatteryString(DEFAULT_NAME, DevExt->State.DeviceName);
         SimBattSetBatteryString(DEFAULT_MANUFACTURER,
             DevExt->State.ManufacturerName);
@@ -375,7 +375,8 @@ Return Value:
         break;
 
     case BatteryEstimatedTime:
-        AtRate = -90;
+       if (DevExt->State.EstimatedTime == SIMBATT_RATE_CALCULATE) {
+
        
             if (AtRate == 0) {
                 AtRate = DevExt->State.BatteryStatus.Rate;
@@ -390,7 +391,7 @@ Return Value:
                 ResultValue = BATTERY_UNKNOWN_TIME;
             }
 
-        
+       }
 
         ReturnBuffer = &ResultValue;
         ReturnBufferLength = sizeof(ResultValue);
