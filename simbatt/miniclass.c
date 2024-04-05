@@ -179,10 +179,19 @@ Return Value:
         DevExt->State.Version = SIMBATT_STATE_VERSION;
         DevExt->State.BatteryStatus.PowerState = BATTERY_DISCHARGING;
         DevExt->State.BatteryStatus.Capacity = 100;
+<<<<<<< Updated upstream
         DevExt->State.BatteryStatus.Voltage = 19;
         DevExt->State.BatteryStatus.Rate = 95;
         DevExt->State.BatteryInfo.Capabilities = BATTERY_SYSTEM_BATTERY;
         DevExt->State.BatteryInfo.Technology = 1;
+=======
+        DevExt->State.BatteryStatus.Voltage = 14;
+        DevExt->State.BatteryStatus.Rate = UNKNOWN_RATE;
+        DevExt->State.EstimatedTime = SIMBATT_RATE_CALCULATE;
+        DevExt->State.BatteryInfo.Capabilities = BATTERY_CAPACITY_RELATIVE;
+        DevExt->State.BatteryInfo.Technology = 1;
+        DevExt->State.BatteryInfo.Chemistry[0] = '3';
+>>>>>>> Stashed changes
         DevExt->State.BatteryInfo.DesignedCapacity = 100;
         DevExt->State.BatteryInfo.FullChargedCapacity = 100;
         DevExt->State.BatteryInfo.DefaultAlert1 = 0;
@@ -375,8 +384,12 @@ Return Value:
         break;
 
     case BatteryEstimatedTime:
+<<<<<<< Updated upstream
         AtRate = -90;
        
+=======
+        if (DevExt->State.EstimatedTime == SIMBATT_RATE_CALCULATE) {
+>>>>>>> Stashed changes
             if (AtRate == 0) {
                 AtRate = DevExt->State.BatteryStatus.Rate;
             }
@@ -390,7 +403,14 @@ Return Value:
                 ResultValue = BATTERY_UNKNOWN_TIME;
             }
 
+<<<<<<< Updated upstream
         
+=======
+        }
+        else {
+            ResultValue = DevExt->State.EstimatedTime;
+        }
+>>>>>>> Stashed changes
 
         ReturnBuffer = &ResultValue;
         ReturnBufferLength = sizeof(ResultValue);

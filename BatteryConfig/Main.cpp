@@ -53,7 +53,8 @@ int ReadBatInfo(std::string command, std::string& timeToEmpty)
 
     return percentageRemaining;
 }
-int wmain() {
+
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR lpCmdLine, int nCmdShow) {
     while (true) {
     std::string timeToEmpty;
     const unsigned int newCharge = ReadBatInfo("0D",timeToEmpty);
@@ -107,11 +108,23 @@ int wmain() {
     // Toggle between charge and discharge
     status.PowerState = (PowerInfo == 1) ? BATTERY_POWER_ON_LINE | BATTERY_CHARGING : BATTERY_DISCHARGING;
 
-    RateWrap.AtRate = -6; // 0 minutes
-    //RateWrap.Set(battery.Get()); // Set the new rate)
     status.Capacity = newCharge; 
+<<<<<<< Updated upstream
     status.Rate = 30; // 95W
     status.Voltage = 19;    // 19V
+=======
+
+    if(PowerInfo== 1)
+	{
+		status.Rate = 80; // 95W
+	}
+	else
+	{
+		status.Rate = -80; // 95W
+	};
+
+    status.Voltage = 14;  // 14V
+>>>>>>> Stashed changes
     status.Set(battery.Get()); // Set the new status
 
     Sleep(5000);
