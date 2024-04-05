@@ -109,10 +109,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR lpCmdLin
     status.PowerState = (PowerInfo == 1) ? BATTERY_POWER_ON_LINE | BATTERY_CHARGING : BATTERY_DISCHARGING;
 
     status.Capacity = newCharge; 
-<<<<<<< Updated upstream
-    status.Rate = 30; // 95W
-    status.Voltage = 19;    // 19V
-=======
 
     if(PowerInfo== 1)
 	{
@@ -124,7 +120,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR lpCmdLin
 	};
 
     status.Voltage = 14;  // 14V
->>>>>>> Stashed changes
+
     status.Set(battery.Get()); // Set the new status
 
     Sleep(5000);
