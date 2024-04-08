@@ -63,7 +63,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR lpCmdLin
    
     wprintf(L"Power state: Battery is %s\n", PowerInfo == 1 ? L"powered" : L"not powered");
 
-    wchar_t deviceInstancePath[18] = L"SWD\\DEVGEN\\1";
+    wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000";
+    //ROOT\\BATTERY\\0000
     wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath);
 
     std::wstring pdoPath;
@@ -91,13 +92,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR lpCmdLin
         return -1;
     }
 
-
-    BatteryInformationWrap RateWrap(battery.Get());
-    wprintf(L"Battery information:\n");
-    RateWrap.Print();
-    wprintf(L"\n");
-
-
     BatteryStausWrap status(battery.Get());
     wprintf(L"Battery status (before update):\n");
     status.Print();
@@ -110,13 +104,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR lpCmdLin
 
     status.Capacity = newCharge; 
 
-    if(PowerInfo== 1)
+    if(PowerInfo == 1)
 	{
-		status.Rate = 80; // 95W
+		status.Rate = 80; 
 	}
 	else
 	{
-		status.Rate = -80; // 95W
+		status.Rate = -80; 
 	};
 
     status.Voltage = 14;  // 14V
