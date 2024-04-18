@@ -19,6 +19,9 @@ Abstract:
 
 #include "simbatt.h"
 #include "simbattdriverif.h"
+#include <Cgos.h>
+#include <stdio.h>
+//#include <cstdint>
 
 //--------------------------------------------------------------------- Literals
 
@@ -26,6 +29,10 @@ Abstract:
 #define DEFAULT_MANUFACTURER        L"Adok"
 #define DEFAULT_SERIALNO            L"0000"
 #define DEFAULT_UNIQUEID            L"SimulatedBattery0000"
+
+//------------------------------------------------------------------- test Cgos
+
+unsigned int percentageRemaining = 30;
 
 //------------------------------------------------------------------- Prototypes
 
@@ -177,9 +184,16 @@ Return Value:
         WdfWaitLockAcquire(DevExt->StateLock, NULL);
         SimBattUpdateTag(DevExt);
         DevExt->State.Version = SIMBATT_STATE_VERSION;
+<<<<<<< Updated upstream
         DevExt->State.BatteryStatus.Capacity = 100;
         DevExt->State.BatteryStatus.Voltage = 14000;
         DevExt->State.BatteryStatus.Rate = 95;
+=======
+        DevExt->State.BatteryStatus.PowerState = BATTERY_POWER_ON_LINE;
+        DevExt->State.BatteryStatus.Capacity = percentageRemaining;
+        DevExt->State.BatteryStatus.Voltage = BATTERY_UNKNOWN_VOLTAGE;
+        DevExt->State.BatteryStatus.Rate = -60;
+>>>>>>> Stashed changes
         DevExt->State.BatteryInfo.Capabilities = BATTERY_SYSTEM_BATTERY;
         DevExt->State.BatteryInfo.Technology = 1;
         DevExt->State.BatteryInfo.Chemistry[3];

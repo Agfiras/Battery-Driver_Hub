@@ -56,7 +56,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);DRIVER;DEBUGPRINT</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\inc,</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\simbatt\Dependecies\Cgos</AdditionalIncludeDirectories>
       <ExceptionHandling>
       </ExceptionHandling>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -70,7 +70,8 @@
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\inc</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);$(DDK_LIB_PATH)\battc.lib;</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);$(DDK_LIB_PATH)\battc.lib;C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\simbatt\Dependecies\LIB\Cgos.lib;User32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\simbatt\Dependecies\LIB</AdditionalLibraryDirectories>
     </Link>
     <DriverSign>
       <FileDigestAlgorithm>sha256</FileDigestAlgorithm>
@@ -87,7 +88,7 @@ copy "C:\Program Files (x86)\Windows Kits\10\tools\$(WDKBuildFolder)\x64\devgen.
       <TreatWarningAsError>true</TreatWarningAsError>
       <WarningLevel>Level4</WarningLevel>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);DRIVER;DEBUGPRINT</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\inc,</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\simbatt\Dependecies\Cgos</AdditionalIncludeDirectories>
       <ExceptionHandling>
       </ExceptionHandling>
       <LanguageStandard>stdcpp17</LanguageStandard>
@@ -101,7 +102,8 @@ copy "C:\Program Files (x86)\Windows Kits\10\tools\$(WDKBuildFolder)\x64\devgen.
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\inc</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies);$(DDK_LIB_PATH)\battc.lib;</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies);$(DDK_LIB_PATH)\battc.lib;C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\simbatt\Dependecies\LIB\Cgos.lib;User32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\simbatt\Dependecies\LIB</AdditionalLibraryDirectories>
     </Link>
     <DriverSign>
       <FileDigestAlgorithm>sha256</FileDigestAlgorithm>

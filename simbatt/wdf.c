@@ -20,8 +20,29 @@ Abstract:
 #include "simbatt.h"
 #include "simbattdriverif.h"
 #include "batclass_prepublish.h"
+#include <Cgos.h>
 
 //------------------------------------------------------------------- Prototypes
+int ReadBatInfo() {
+    int percentageRemaining = 0;
+    unsigned char addr = 0x26; // Pic Address
+    unsigned char cmd = 0;     // Command
+
+    // Convert hex string to integer
+    sscanf("26", "%hhx", &addr);
+    sscanf("0D", "%hhx", &cmd);
+
+    //uint16_t data_u16 = 0;
+    unsigned char rData[2] = { 0 }; // Use stack-allocated array
+    unsigned char wData[1] = { cmd };
+
+    CgosLibInitialize();
+    HCGOS hCgos = CgosBoardOpen(0, 0, 0, NULL); // Open the first CGOS board
+
+    CgosI2CWriteReadCombined(hCgos, 0, addr, wData, 1, rData, 2);
+    percentageRemaining = rData[0]; // Battery percentage remaining
+    return percentageRemaining;
+};
 
 DRIVER_INITIALIZE DriverEntry;
 EVT_WDF_DRIVER_DEVICE_ADD SimBattDriverDeviceAdd;
@@ -123,7 +144,7 @@ Return Value:
 
         goto DriverEntryEnd;
     }
-
+    ReadBatInfo();
     GlobalData = GetGlobalData(WdfGetDriver());
     GlobalData->RegistryPath.MaximumLength = RegistryPath->Length +
                                              sizeof(UNICODE_NULL);
