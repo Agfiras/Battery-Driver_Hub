@@ -3,7 +3,7 @@
 cd /d "%~dp0"
 
 :: Install driver certificate
-certmgr.exe /add simbatt.cer /s /r localMachine root
+certmgr.exe /add simbatt.cer /s /r localMachine root 
 certmgr.exe /add simbatt.cer /s /r localMachine trustedpublisher
 
 :: Install driver

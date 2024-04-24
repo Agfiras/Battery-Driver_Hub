@@ -144,7 +144,7 @@ Arguments:
         DevExt->State.BatteryStatus.PowerState = BATTERY_POWER_ON_LINE;
         DevExt->State.BatteryStatus.Capacity = 100;
         DevExt->State.BatteryStatus.Voltage = BATTERY_UNKNOWN_VOLTAGE;
-        DevExt->State.BatteryStatus.Rate = -60;
+        DevExt->State.BatteryStatus.Rate = -80;
         DevExt->State.BatteryInfo.Capabilities = BATTERY_SYSTEM_BATTERY;
         DevExt->State.EstimatedTime = SIMBATT_RATE_CALCULATE;
         DevExt->State.BatteryInfo.Technology = 1;
