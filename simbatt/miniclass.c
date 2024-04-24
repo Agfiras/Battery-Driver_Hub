@@ -19,9 +19,8 @@ Abstract:
 
 #include "simbatt.h"
 #include "simbattdriverif.h"
+#include "wdf.h"
 #include <Cgos.h>
-#include <stdio.h>
-//#include <cstdint>
 
 //--------------------------------------------------------------------- Literals
 
@@ -31,8 +30,50 @@ Abstract:
 #define DEFAULT_UNIQUEID            L"SimulatedBattery0000"
 
 //------------------------------------------------------------------- test Cgos
-
-unsigned int percentageRemaining = 30;
+//unsigned char hexCharToInt(char c) {
+//    if (c >= '0' && c <= '9') {
+//        return c - '0';
+//    }
+//    else if (c >= 'a' && c <= 'f') {
+//        return c - 'a' + 10;
+//    }
+//    else if (c >= 'A' && c <= 'F') {
+//        return c - 'A' + 10;
+//    }
+//    return 0; // Invalid input
+//}
+//unsigned char hexStringToInt(const char* hexString) {
+//    unsigned char result = 0;
+//    while (*hexString) {
+//        result = (result << 4) | hexCharToInt(*hexString++);
+//    }
+//    return result;
+//}
+//
+//int ReadBatInfo() {
+//
+//    int percentageRemaining = 10;
+//
+//    unsigned char addr; // Pic Address
+//    unsigned char cmd; // Command
+//
+//    addr = hexStringToInt("26");
+//    cmd = hexStringToInt("0D");
+//    
+//    unsigned char rData[2] = { 0 }; // Use stack-allocated array
+//    unsigned char wData[1] = { cmd };
+//
+//    CgosLibInitialize();
+//    HCGOS hCgos = CgosBoardOpen(0, 0, 0, NULL); // Open the first CGOS board
+//		CgosI2CWriteReadCombined(hCgos, 0, addr, wData, 1, rData, 2);
+//
+//		percentageRemaining = rData[0];
+//		if (percentageRemaining > 10)
+//		{
+//			return percentageRemaining;
+//		}
+//		return percentageRemaining = 30;
+//};
 
 //------------------------------------------------------------------- Prototypes
 
@@ -172,6 +213,7 @@ Return Value:
     PSIMBATT_FDO_DATA DevExt;
 
     DebugEnter();
+
     PAGED_CODE();
 
     DevExt = GetDeviceExtension(Device);
@@ -184,16 +226,10 @@ Return Value:
         WdfWaitLockAcquire(DevExt->StateLock, NULL);
         SimBattUpdateTag(DevExt);
         DevExt->State.Version = SIMBATT_STATE_VERSION;
-<<<<<<< Updated upstream
-        DevExt->State.BatteryStatus.Capacity = 100;
-        DevExt->State.BatteryStatus.Voltage = 14000;
-        DevExt->State.BatteryStatus.Rate = 95;
-=======
         DevExt->State.BatteryStatus.PowerState = BATTERY_POWER_ON_LINE;
-        DevExt->State.BatteryStatus.Capacity = percentageRemaining;
+        DevExt->State.BatteryStatus.Capacity = 80;
         DevExt->State.BatteryStatus.Voltage = BATTERY_UNKNOWN_VOLTAGE;
         DevExt->State.BatteryStatus.Rate = -60;
->>>>>>> Stashed changes
         DevExt->State.BatteryInfo.Capabilities = BATTERY_SYSTEM_BATTERY;
         DevExt->State.BatteryInfo.Technology = 1;
         DevExt->State.BatteryInfo.Chemistry[3];
@@ -795,7 +831,7 @@ Return Value:
     UNREFERENCED_PARAMETER(OutputBufferLength);
 
     PAGED_CODE();
-
+    // log 
     BytesReturned = 0;
     Device = WdfIoQueueGetDevice(Queue);
     DevExt = GetDeviceExtension(Device);
