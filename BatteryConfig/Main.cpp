@@ -10,7 +10,7 @@ int ReadBatInfo(std::string command, std::string& timeToEmpty)
 {
     unsigned int percentageRemaining = 0;   // Battery percentage remaining
     byte addr = 0x26; // Pic Address
-    byte cmd = 0;     // Command
+    byte cmd = 0;     // Commande
 
     try {
         addr = std::stoi("26", nullptr, 16);    // Convert hex string to integer
