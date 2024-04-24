@@ -1,0 +1,2 @@
+cd /d "C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub\simbatt" &msbuild "simbatt.vcxproj" /t:sdvViewer /p:configuration="Debug" /p:platform="x64" /p:SolutionDir="C:\Users\Adok\source\repos\Agfiras\Battery-Driver_Hub" 
+exit %errorlevel% 

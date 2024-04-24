@@ -41,6 +41,18 @@
     <ClInclude Include="*.h;*.hpp;*.hxx;*.hm;*.inl;*.xsd">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="*.h;*.hpp;*.hxx;*.hm;*.inl;*.xsd">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="*.h;*.hpp;*.hxx;*.hm;*.inl;*.xsd">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="*.h;*.hpp;*.hxx;*.hm;*.inl;*.xsd">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="*.h;*.hpp;*.hxx;*.hm;*.inl;*.xsd">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Inf Include="*.inx">
@@ -49,5 +61,16 @@
     <Inf Include="*.inx">
       <Filter>Driver Files</Filter>
     </Inf>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="*.def;*.bat;*.hpj;*.asmx">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="*.def;*.bat;*.hpj;*.asmx">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="*.def;*.bat;*.hpj;*.asmx">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

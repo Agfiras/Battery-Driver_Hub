@@ -1,0 +1,80 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: MSBuild
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  # Path to the solution file relative to the root of the project.
+  SOLUTION_FILE_PATH: "BatterySimulator.sln"
+
+  # Configuration type to build.
+  # You can convert this to a build matrix if you need coverage of multiple configuration types.
+  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  BUILD_CONFIGURATION: Release
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        repository: Agfiras/Battery-Driver_Hub
+        submodules: true
+        lfs: true
+    
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.0.2
+      with:
+        msbuild-architecture: x64
+        
+    - name: Check Secure Boot Status
+      id: secure_boot
+      shell: pwsh
+      run: |
+        $secureBootStatus = Get-WmiObject -Query "SELECT SecureBootEnabled FROM Win32_BIOS"
+        if ($secureBootStatus.SecureBootEnabled) {
+          echo "Secure Boot is enabled."
+          echo "::set-output name=secure_boot::enabled"
+        } else {
+          echo "Secure Boot is disabled."
+          echo "::set-output name=secure_boot::disabled"
+        }
+      
+    - name: Disable Secure Boot
+      if: steps.secure_boot.outputs.secure_boot == 'enabled'
+      shell: pwsh
+      run: |
+        bcdedit /set testsigning off
+        bcdedit /set nointegritychecks off
+        shutdown /r /f /t 0
+          
+    - name: Enable test-signed drivers
+      if: steps.secure_boot.outputs.secure_boot == 'disabled'
+      shell: pwsh
+      run: |
+        bcdedit /set testsigning on
+
+    - name: Run INSTALL.bat as Administrator
+      if: steps.secure_boot.outputs.secure_boot == 'disabled'
+      shell: pwsh
+      run: |
+        Start-Process -FilePath "Battery-Driver_Hub\x64\Debug\simbatt\INSTALL.bat" -Verb RunAs -Wait
+        
+    - name: Build
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      # Add additional options to the MSBuild command line here (like platform or verbosity level).
+      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} ${{env.SOLUTION_FILE_PATH}}

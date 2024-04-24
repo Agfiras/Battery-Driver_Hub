@@ -55,7 +55,7 @@
       </AdditionalUsingDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>Cgos.lib;$(CoreLibraryDependencies);</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)\BatteryConfig\Dependecies\LIB</AdditionalLibraryDirectories>
@@ -76,7 +76,7 @@
       </AdditionalUsingDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>

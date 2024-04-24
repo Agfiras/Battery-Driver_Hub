@@ -1,238 +1,124 @@
 #define INITGUID
 #include "Battery.hpp"
 #include "DeviceInstance.hpp"
-#include <wrl/wrappers/corewrappers.h> // for FileHandle
-#include <cassert>
 #include <Cgos.h>
-#include <iostream> 
-#include <cstdlib>
-#include <cstdlib>
-#include <cctype>
-#include <Windows.h>
 #include <iostream>
-#include <sstream>
-#include <iomanip>
-#include <string>
-#include <sstream>
-#include <stdexcept>
-#include <vector> 
+#include <Windows.h>
+#include <wrl/wrappers/corewrappers.h>
 
- void ReadBatInfo(std::string command) {
+int ReadBatInfo(std::string command, std::string& timeToEmpty) 
+{
+    unsigned int percentageRemaining = 0;   // Battery percentage remaining
+    byte addr = 0x26; // Pic Address
+    byte cmd = 0;     // Command
 
-    unsigned int i2cCongatecI2CIndex = 0; // I2C index
-    UINT16 percentageRemaining = 100;
-    std::string timeToEmpty;      
-    std::string timeToFull;          
-    HCGOS hCgos = 0;    // Handle to the CGOS library
-    byte addr = 26; // Pic Address;
-    byte cmd = 0; // Command
-    
-    try   
-    {
-        //convert addr and cmd to byte
-        addr = std::stoi("26", nullptr, 16);
-        cmd = std::stoi(command, nullptr, 16);
+    try {
+        addr = std::stoi("26", nullptr, 16);    // Convert hex string to integer
+        cmd = std::stoi(command, nullptr, 16);  // Convert hex string to integer
     }
     catch (const std::exception&) {
         std::cerr << "Invalid argument: " << command << std::endl; 
     }
 
     UINT16 data_u16 = 0;
-    byte* rData = new byte[2]();
-    byte* wData = new byte[1]();
-    wData[0] = cmd;
+    byte rData[2] = { 0 }; // Use stack-allocated array
+    byte wData[1] = { cmd };  // Use stack-allocated array
 
     CgosLibInitialize();
-    hCgos = CgosBoardOpen(0, 0, 0, &hCgos);
-    try
-    {
-        CgosI2CWriteReadCombined(hCgos, i2cCongatecI2CIndex, addr, &wData[0], 1,  &rData[0], 2);
-	}   
-	catch (const std::exception& e) 
-    {
-		std::cerr << "Error: " << e.what() << std::endl;
-	}
-
-
-    if(command == "0D")
-        {
-        if (rData[0] <= 100)
-        {
-            percentageRemaining = rData[0];
-            std::cout << "Percentage remaining: " << percentageRemaining << "%" << std::endl;
-        }
-        else if (command == "12")
-        {data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
-            if (data_u16 == 0xFFFF)
-            {
-                timeToEmpty = "Powered.";
-                std::cout << timeToEmpty<< std::endl;
-            }
-            else
-            {
-                int hours = data_u16 / 60;
-                int minutes = data_u16 % 60;
-                std::stringstream ss;
-                ss << hours << "h" << minutes << "m";
-                timeToEmpty = ss.str();
-                std::cout << timeToEmpty<< std::endl;
-            }
-        }
-        else if (command == "13")
-        {
-            data_u16 = (UINT16)((rData[1] << 8) | rData[0]);
-			if (data_u16 == 0xFFFF)
-			{
-				timeToFull = "Not charging";
-                std::cout << timeToFull<< std::endl;
-			}
-			else
-			{
-                if (data_u16 <= 300)
-                {
-                    if (data_u16 == 0)
-                    {
-                        timeToFull = "Charged.";
-                        std::cout << timeToFull<< std::endl;
-                    }
-                    else
-                    {
-                        int hours = data_u16 / 60;
-                        int minutes = data_u16 % 60;
-                        std::stringstream ss;
-                        ss << hours << "h" << minutes << "m";
-                        timeToEmpty = ss.str();
-                        std::cout << timeToEmpty<< std::endl;
-                    }
-                }
-
-			}
-		}
-    }
-};
-int wmain(int argc, wchar_t* argv[]) {
-  HCGOS hCgos = 0;
-  unsigned int cntCongatecI2C = 0;
-  unsigned int i2cCongatecI2CIndex = 0;
-  int picAddress = 0x26; // Pic Address;
-  unsigned long dwUnit = 0 ;
-  unsigned char bAddr = 0;
-  unsigned char pDatabyte = 0;
-  unsigned long wReg = 0;
-  // Get library and driver versions
-  unsigned long dwLibVersion = CgosLibGetVersion();
-  unsigned long dwDrvVersion = CgosLibGetDrvVersion();
-  std::cout << "Library version: " << dwLibVersion << std::endl;
-  // Check library initialization
-  if (!CgosLibInitialize()) {
-    // Handle failed initialization (e.g., log error)
-    std::cerr << "Error: CgosLibInitialize failed" << std::endl;
-    return -1;
-    {
-
-  // Driver installation check (optional)
-  if (!CgosLibInitialize()) { // Assuming this function exists
-    if (!CgosLibInstall(1)) {
-      std::cerr << "Error: driver installation failed" << std::endl;
-      CgosLibUninitialize(); // Cleanup even if install fails
-      return -1;
-    }
-   }
-  }
-  }
-
-  ReadBatInfo("0D");
-  ReadBatInfo("12");
-  ReadBatInfo("13");
-
-  // Open the board
-  hCgos = CgosBoardOpen(0, 0, 0, &hCgos);
-
-
-  if (!hCgos) 
-    {
-    std::cerr << "Could not open a board" << std::endl;
-    } 
-  else 
-  {
-    std::cerr << "Board opened successfully" << std::endl;
-  // Close the board and cleanup
-  if (hCgos) {
-    CgosBoardClose(hCgos);
-  }
-  CgosLibUninitialize();
-  std::cout << "checked and closed" << std::endl;
-  return 0;
-  }
-
-    const unsigned int batteryIdx = _wtoi(argv[1]); // 0 is first battery
-    unsigned int newCharge = _wtoi(argv[2]);
-
-    wchar_t deviceInstancePath[18] = {};
-    swprintf_s(deviceInstancePath, L"SWD\\DEVGEN\\%i", batteryIdx); // add device index suffix
-    wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath);
-
-    std::wstring pdoPath;
+    HCGOS hCgos = CgosBoardOpen(0, 0, 0, nullptr);  // Open the first CGOS board
     try {
-        DeviceInstance dev(deviceInstancePath);
+        CgosI2CWriteReadCombined(hCgos, 0, addr, wData, 1, rData, 2);    // Write and read data
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl; 
+    }
 
-        auto ver = dev.GetDriverVersion();
-        wprintf(L"  Driver version: %s.\n", ver.c_str());
-        auto time = dev.GetDriverDate();
-        wprintf(L"  Driver date: %s.\n", DeviceInstance::FileTimeToDateStr(time).c_str());
+    if (command == "0D") {
+        percentageRemaining = rData[0];     // Battery percentage remaining
+    }
+    else if (command == "12") {
+        data_u16 = (UINT16)((rData[1] << 8) | rData[0]);  // Battery time to empty
+        if (data_u16 == 0xFFFF) {
+            return 1;
+        }
+        else 
+        {
+           int hours = data_u16 / 60; 
+           int minutes = data_u16 % 60;
+           timeToEmpty = std::to_string(hours) + " hours " + std::to_string(minutes) + " minutes"; 
+           std::cout << "Time to empty: " << timeToEmpty << std::endl;  
+          return 0;
+        }
+    }
 
-        pdoPath = dev.GetPDOPath();
-    } catch (std::exception& e) {
+    return percentageRemaining;
+}
+
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR lpCmdLine, int nCmdShow) {
+    while (true) {
+    std::string timeToEmpty;    
+    const unsigned int newCharge = ReadBatInfo("0D",timeToEmpty); // Read battery percentage remaining
+    const unsigned int PowerInfo = ReadBatInfo("12",timeToEmpty); // Read battery time to empty
+   
+    // wprintf(L"Power state: Battery is %s\n", PowerInfo == 1 ? L"powered" : L"not powered"); // Check if battery is powered
+
+    wchar_t deviceInstancePath[18] = L"SWD\\DEVGEN\\1"; // Device instance path
+
+    //wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath); // Print device instance path
+
+    std::wstring pdoPath; // PDO path
+
+    try {
+        DeviceInstance dev(deviceInstancePath); // Device instance
+        auto ver = dev.GetDriverVersion(); // Get driver version
+        //wprintf(L"  Driver version: %s.\n", ver.c_str()); // Print driver version
+        auto time = dev.GetDriverDate(); // Get driver date
+        //wprintf(L"  Driver date: %s.\n", DeviceInstance::FileTimeToDateStr(time).c_str()); // Print driver date
+        pdoPath = dev.GetPDOPath(); // Get PDO path
+    }
+    catch (std::exception& e) {
         wprintf(L"ERROR: Unable to locate battery %s\n", deviceInstancePath);
         wprintf(L"ERROR: what: %hs\n", e.what());
         return -1;
     }
 
-    wprintf(L"Opening %s\n", pdoPath.c_str());
-    Microsoft::WRL::Wrappers::FileHandle battery(CreateFileW(pdoPath.c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL));
+    //wprintf(L"Opening %s\n", pdoPath.c_str());
+    Microsoft::WRL::Wrappers::FileHandle battery(CreateFileW(pdoPath.c_str(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, 0, nullptr)); // Open battery
+
     if (!battery.IsValid()) {
-        DWORD err = GetLastError();
-        wprintf(L"ERROR: CreateFileW (err=%i).\n", err);
+        DWORD err = GetLastError(); // Get last error
+        //wprintf(L"ERROR: CreateFileW (err=%i).\n", err); // print Error     
         return -1;
     }
 
-    BatteryInformationWrap info(battery.Get());
-    wprintf(L"\n"); 
-    wprintf(L"Battery information:\n");
-    info.Print();
-    wprintf(L"\n");
 
-    BatteryStausWrap status(battery.Get());
-    wprintf(L"Battery status (before update):\n");
-    status.Print();
-    wprintf(L"\n");
+    BatteryStausWrap status(battery.Get()); // Battery status
+    //wprintf(L"Battery status (before update):\n"); // Print battery status
+    //status.Print(); // Print battery status
+    //wprintf(L"\n"); // Print new line
 
-#if 0
-    // update battery information
-    info.Set(battery.Get());
-#endif
+    wprintf(L"New charge level: %u\n", newCharge);
 
-    // update battery charge level
-    {
-        // toggle between charge and dischage
-        if (newCharge > status.Capacity)
-            status.PowerState = BATTERY_POWER_ON_LINE | BATTERY_CHARGING; // charging while on AC power
-        else if (newCharge < status.Capacity)
-            status.PowerState = BATTERY_DISCHARGING; // discharging
-        else
-            status.PowerState = 0; // same charge as before
+    // Toggle between charge and discharge
+    status.PowerState = (PowerInfo == 1) ? BATTERY_POWER_ON_LINE | BATTERY_CHARGING : BATTERY_DISCHARGING; // Set power state
 
-        // update charge level
-        status.Capacity = newCharge;
+    status.Capacity = newCharge;  // Set the new charge level
 
-        status.Rate = BATTERY_UNKNOWN_RATE; // was 0
-        status.Voltage = BATTERY_UNKNOWN_VOLTAGE; // was -1
+    if(PowerInfo == 1)       
+	{
+		status.Rate = 80; // 80W
+	}
+	else
+	{
+		status.Rate = -80; // -80W
+	}
 
-        status.Set(battery.Get());
+    status.Voltage = 14;   // 14V
+
+    status.Set(battery.Get()); // Set the new status
+
+    Sleep(2000); // Sleep for 2 seconds
+
     }
-
-    wprintf(L"Battery status (after update):\n");
-    status.Print();
-
-    return 0; 
-};
+    return 0;
+}
