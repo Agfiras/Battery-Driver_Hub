@@ -5,6 +5,7 @@ $installScriptPath = "$env:GITHUB_WORKSPACE\simbatt\simbatt install\INSTALL.BAT"
 if (Test-Path $installScriptPath -PathType Leaf) {
     # Run the INSTALL.BAT file as administrator
     Start-Process -FilePath "cmd.exe" -ArgumentList "/c $installScriptPath" -Verb RunAs -Wait
+    Write-Host "Done"
 } else {
     Write-Host "INSTALL.BAT file not found at $installScriptPath"
 }
