@@ -36,24 +36,10 @@ jobs:
       shell: pwsh
       run: ./check_secure_boot.ps1
 
-        
-
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.2
       with:
         msbuild-architecture: x64
-
-    - name: Run script to check Secure Boot
-      shell: powershell
-      run: ./check_secure_boot.ps1
-      
-    - name: Disable Secure Boot
-      if: steps.secure_boot.outputs.secure_boot == 'enabled'
-      shell: pwsh
-      run: |
-        bcdedit /set testsigning off
-        bcdedit /set nointegritychecks off
-        shutdown /r /f /t 
           
     - name: Enable test-signed drivers
       shell: pwsh
