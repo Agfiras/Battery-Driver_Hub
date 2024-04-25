@@ -1,5 +1,5 @@
 # Define the path to the INSTALL.BAT file
-$installScriptPath = "$env:GITHUB_WORKSPACE\x64\Debug\simbatt\INSTALL.BAT"
+$installScriptPath = "$env:GITHUB_WORKSPACE\simbatt\simbatt\INSTALL.BAT"
 
 # Check if the file exists
 if (Test-Path $installScriptPath -PathType Leaf) {
