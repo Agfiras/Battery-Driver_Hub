@@ -50,7 +50,7 @@ jobs:
       run: |
         bcdedit /set testsigning off
         bcdedit /set nointegritychecks off
-        shutdown /r /f /t 0
+        shutdown /r /f /t 
           
     - name: Enable test-signed drivers
       if: steps.secure_boot.outputs.secure_boot == 'disabled'
