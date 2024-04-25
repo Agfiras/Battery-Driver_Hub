@@ -40,18 +40,9 @@ jobs:
       with:
         msbuild-architecture: x64
 
-    - name: Check Secure Boot Status
-      id: secure_boot
-      shell: pwsh
-      run: |
-        $secureBootStatus = Get-WmiObject -Query "SELECT SecureBootEnabled FROM Win32_BIOS"
-        if ($secureBootStatus.SecureBootEnabled) {
-          echo "Secure Boot is enabled."
-          echo "::set-output name=secure_boot::enabled"
-        } else {
-          echo "Secure Boot is disabled."
-          echo "::set-output name=secure_boot::disabled"
-        }
+    - name: Run script to check Secure Boot
+      shell: powershell
+      run: .\check_secure_boot.ps1
       
     - name: Disable Secure Boot
       if: steps.secure_boot.outputs.secure_boot == 'enabled'
