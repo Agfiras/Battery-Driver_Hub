@@ -33,7 +33,7 @@ jobs:
      
         
     - name: Run script to check Secure Boot
-      shell: powershell
+      shell: pwsh
       run: ./check_secure_boot.ps1
 
         
