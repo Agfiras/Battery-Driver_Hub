@@ -32,7 +32,7 @@ jobs:
       uses: actions/checkout@v4
      
         
-    - name: Run script to check Secure Boot
+    - name: check Secure Boot
       shell: pwsh
       run: ./check_secure_boot.ps1
 
@@ -56,12 +56,12 @@ jobs:
         shutdown /r /f /t 
           
     - name: Enable test-signed drivers
-      if: steps.secure_boot.outputs.secure_boot == 'disabled'
+      if: steps.secure_boot.outputs.check Secure Boot == 'Secure Boot is not enabled'
       shell: pwsh
       run: |
         bcdedit /set testsigning on
     - name: Run INSTALL.bat as Administrator
-      if: steps.secure_boot.outputs.secure_boot == 'disabled'
+      if: steps.secure_boot.outputs.check Secure Boot == 'Secure Boot is not enabled.'
       shell: pwsh
       run: |
         Start-Process -FilePath "Battery-Driver_Hub\x64\Debug\simbatt\INSTALL.bat" -Verb RunAs -Wait
