@@ -62,7 +62,7 @@ jobs:
         
     - name: Run INSTALL.bat as Administrator
       shell: pwsh
-      run: ./x64/Debug/simbatt/INSTALL.bat
+      run: ./Install_Driver.ps1
         
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
