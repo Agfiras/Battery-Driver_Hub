@@ -42,7 +42,7 @@ jobs:
 
     - name: Run script to check Secure Boot
       shell: powershell
-      run: Battery-Driver_Hub\check_secure_boot.ps1
+      run: .\Battery-Driver_Hub\check_secure_boot.ps1
       
     - name: Disable Secure Boot
       if: steps.secure_boot.outputs.secure_boot == 'enabled'
