@@ -30,10 +30,13 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
-      with:
-        repository: Agfiras/Battery-Driver_Hub
-        submodules: true
-        lfs: true
+     
+        
+    - name: Run script to check Secure Boot
+      shell: powershell
+      run: ./check_secure_boot.ps1
+
+        
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.2
