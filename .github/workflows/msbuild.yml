@@ -49,4 +49,12 @@ jobs:
     - name: Run INSTALL.bat as Administrator
       shell: pwsh
       run: ./Install_Driver.ps1
-        
+      
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./x64
+        asset_name: BatteryConfig.exe
+        asset_content_type: application/octet-stream
+        token: ${{ secrets.GITHUB_TOKEN }}
