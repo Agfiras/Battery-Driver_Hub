@@ -26,8 +26,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/Agfiras/Battery-Driver_Hub/">
+    <img src="./Logos/icon.png" alt="Logo" width="200" height="200">
   </a>
   <h3 align="center">ADOK BATTERY</h3> <br>
   <p align="center">
@@ -60,7 +60,6 @@
       </ul>
     </li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -138,14 +137,6 @@ Below is an example of how you can install and setup your HUB.
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
-<!-- CONTACT -->
-## Contact
-
-Firas Ajengui- [@LinkedIn](https://www.linkedin.com/in/firas-ajengui)
-
-Github: [AgFiras](https://github.com/Agfiras)
-
-
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
@@ -160,7 +151,7 @@ I've included a few of my favorites to kick things off!
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/Agfiras/Battery-Driver_Hub/blob/main/LICENSE
+[license-url]: https://www.linkedin.com/in/firas-ajengui
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
