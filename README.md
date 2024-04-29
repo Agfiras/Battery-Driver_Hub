@@ -31,9 +31,9 @@
   </a>
   <h3 align="center">ADOK BATTERY</h3> <br>
   <p align="center">
-    An Excutable to extract informations from PIC through COM Express board 
+    A solution to get Real-time informations of the battery's Hub
     <br>
-   and interact with simbattery of windows
+   and project it in Windows
     <br />
     <a href="https://github.com/Agfiras/Battery-Driver_Hub/blob/main/Logos/Screenshot.gif">View Demo ➡️</a>
   </p>
@@ -70,7 +70,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<p> ADOK BATTERY is an executable designed to interact with the Simbat driver and extract information from COM Express board using the Cgos library. </p>
+<p> ADOK BATTERY is an executable designed to interact with the Simbat driver and extract information from Pic Through COM Express board using the Cgos library. </p>
 
 <p>This tool enables users to retrieve essential data from the PIC, including battery <strong>Capacity</strong>, <strong>Rate</strong>, and <strong>Power state</strong> parameters. Subsequently, it updates the corresponding parameters of the Simbat driver, ensuring synchronization and accurate representation of battery status within the Windows system. </p>
 
@@ -152,7 +152,7 @@ Github: [AgFiras](https://github.com/Agfiras)
 I've included a few of my favorites to kick things off!
 
 * [Writing Battery Miniclass Drivers](https://learn.microsoft.com/en-us/windows-hardware/drivers/battery/writing-battery-miniclass-drivers)
-* [Cgos Documentation](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+* [Cgos Documentation](https://github.com/Agfiras/Battery-Driver_Hub/blob/main/Logos/Cgos.pdf)
 
 
 
