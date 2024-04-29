@@ -1,268 +1,266 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" width="100" alt="project-logo">
-</p>
-<p align="center">
-    <h1 align="center">ADOK_BATTERY</h1>
-</p>
-<p align="center">
-    <em><code>► INSERT-TEXT-HERE</code></em>
-</p>
-<p align="center">
-	<img src="https://github/Agfiras/Battery-Driver_Hub?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="MIT License">
-	<img src="https://img.shields.io/github/languages/top/Agfiras/Battery-Driver_Hub?style=default&color=0080ff" alt="C++">
-<p>
-<p align="center">
-	<!-- default option, no dependency badges. -->
-</p>
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a name="ADOK BATTERY"></a>
+<!--
+*** Thanks for checking out the Best-README-Template. If you have a suggestion
+*** that would make this better, please fork the repo and create a pull request
+*** or simply open an issue with the tag "enhancement".
+*** Don't forget to give the project a star!
+*** Thanks again! Now go create something AMAZING! :D
+-->
 
-<br><!-- TABLE OF CONTENTS -->
+
+
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![MIT License][license-shield]][https://github.com/Agfiras/Battery-Driver_Hub/blob/main/LICENSE]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">Best-README-Template</h3>
+
+  <p align="center">
+    An awesome README template to jumpstart your projects!
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
+
+
+
+<!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary><br>
-
-- [ Overview](#-overview)
-- [ Features](#-features)
-- [ Repository Structure](#-repository-structure)
-- [ Modules](#-modules)
-- [ Getting Started](#-getting-started)
-  - [ Installation](#-installation)
-  - [ Usage](#-usage)
-- [ Contributing](#-contributing)
-- [ License](#-license)
-</details>
-<hr>
-
-##  Overview
-
-<code>► INSERT-TEXT-HERE</code>
-
----
-
-##  Features
-
-<code>► INSERT-TEXT-HERE</code>
-
----
-
-##  Repository Structure
-
-```sh
-└── Battery-Driver_Hub/
-    ├── .github
-    │   └── workflows
-    ├── BatteryConfig
-    │   ├── .gitignore
-    │   ├── Battery.hpp
-    │   ├── BatteryConfig.vcxproj
-    │   ├── BatteryConfig.vcxproj.filters
-    │   ├── Dependecies
-    │   ├── DeviceInstance.hpp
-    │   ├── Main.cpp
-    │   ├── read info.cpp
-    │   └── runsdvui.cmd
-    ├── BatteryMonitor
-    │   ├── .gitignore
-    │   ├── BatteryMonitor.vcxproj
-    │   ├── BatteryMonitor.vcxproj.filters
-    │   └── Main.cpp
-    ├── BatterySimulator.sln
-    ├── DvlErrLog.txt
-    ├── Install_Driver.ps1
-    ├── LICENSE
-    ├── README.md
-    ├── Setup
-    │   ├── Release
-    │   └── Setup.vdproj
-    ├── Test install.iss
-    ├── check_secure_boot.ps1
-    ├── mysetup.exe
-    └── simbatt
-        ├── .gitignore
-        ├── .vs
-        ├── INSTALL.bat
-        ├── RCa02856
-        ├── RCa08772
-        ├── RCa10820
-        ├── RCb10820
-        ├── README.md
-        ├── UNINSTALL.bat
-        ├── batclass_prepublish.h
-        ├── devcon.exe
-        ├── devgen.exe
-        ├── miniclass.c
-        ├── runsdvui.cmd
-        ├── simbatt install
-        ├── simbatt.cat
-        ├── simbatt.h
-        ├── simbatt.inf
-        ├── simbatt.inx
-        ├── simbatt.rc
-        ├── simbatt.sln
-        ├── simbatt.sys
-        ├── simbatt.vcxproj
-        ├── simbatt.vcxproj.Filters
-        ├── simbatt.vcxproj.user
-        ├── simbattdriverif.h
-        └── wdf.c
-```
-
----
-
-##  Modules
-
-<details closed><summary>.</summary>
-
-| File                                                                                                     | Summary                         |
-| ---                                                                                                      | ---                             |
-| [Install_Driver.ps1](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/Install_Driver.ps1)       | <code>► INSERT-TEXT-HERE</code> |
-| [BatterySimulator.sln](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatterySimulator.sln)   | <code>► INSERT-TEXT-HERE</code> |
-| [Test install.iss](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/Test install.iss)           | <code>► INSERT-TEXT-HERE</code> |
-| [DvlErrLog.txt](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/DvlErrLog.txt)                 | <code>► INSERT-TEXT-HERE</code> |
-| [check_secure_boot.ps1](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/check_secure_boot.ps1) | <code>► INSERT-TEXT-HERE</code> |
-
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
 </details>
 
-<details closed><summary>simbatt</summary>
-
-| File                                                                                                                 | Summary                         |
-| ---                                                                                                                  | ---                             |
-| [runsdvui.cmd](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/runsdvui.cmd)                       | <code>► INSERT-TEXT-HERE</code> |
-| [UNINSTALL.bat](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/UNINSTALL.bat)                     | <code>► INSERT-TEXT-HERE</code> |
-| [simbatt.vcxproj.user](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/simbatt.vcxproj.user)       | <code>► INSERT-TEXT-HERE</code> |
-| [RCa10820](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/RCa10820)                               | <code>► INSERT-TEXT-HERE</code> |
-| [simbatt.vcxproj](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/simbatt.vcxproj)                 | <code>► INSERT-TEXT-HERE</code> |
-| [wdf.c](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/wdf.c)                                     | <code>► INSERT-TEXT-HERE</code> |
-| [miniclass.c](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/miniclass.c)                         | <code>► INSERT-TEXT-HERE</code> |
-| [simbatt.rc](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/simbatt.rc)                           | <code>► INSERT-TEXT-HERE</code> |
-| [RCa08772](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/RCa08772)                               | <code>► INSERT-TEXT-HERE</code> |
-| [simbattdriverif.h](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/simbattdriverif.h)             | <code>► INSERT-TEXT-HERE</code> |
-| [RCa02856](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/RCa02856)                               | <code>► INSERT-TEXT-HERE</code> |
-| [INSTALL.bat](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/INSTALL.bat)                         | <code>► INSERT-TEXT-HERE</code> |
-| [batclass_prepublish.h](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/batclass_prepublish.h)     | <code>► INSERT-TEXT-HERE</code> |
-| [RCb10820](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/RCb10820)                               | <code>► INSERT-TEXT-HERE</code> |
-| [simbatt.h](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/simbatt.h)                             | <code>► INSERT-TEXT-HERE</code> |
-| [simbatt.sln](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/simbatt.sln)                         | <code>► INSERT-TEXT-HERE</code> |
-| [simbatt.vcxproj.Filters](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/simbatt.vcxproj.Filters) | <code>► INSERT-TEXT-HERE</code> |
-
-</details>
-
-<details closed><summary>simbatt.simbatt install</summary>
-
-| File                                                                                                             | Summary                         |
-| ---                                                                                                              | ---                             |
-| [UNINSTALL.bat](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/simbatt install/UNINSTALL.bat) | <code>► INSERT-TEXT-HERE</code> |
-| [INSTALL.bat](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/simbatt install/INSTALL.bat)     | <code>► INSERT-TEXT-HERE</code> |
-
-</details>
-
-<details closed><summary>simbatt..vs.simbatt.FileContentIndex</summary>
-
-| File                                                                                                                                                                                    | Summary                         |
-| ---                                                                                                                                                                                     | ---                             |
-| [6dfb14c2-37c9-41ce-b2c8-3cbd71317e69.vsidx](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/.vs/simbatt/FileContentIndex/6dfb14c2-37c9-41ce-b2c8-3cbd71317e69.vsidx) | <code>► INSERT-TEXT-HERE</code> |
-| [c52e2bed-46ec-4570-89e0-e923563ed33d.vsidx](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/.vs/simbatt/FileContentIndex/c52e2bed-46ec-4570-89e0-e923563ed33d.vsidx) | <code>► INSERT-TEXT-HERE</code> |
-
-</details>
-
-<details closed><summary>simbatt..vs.simbatt.v17</summary>
-
-| File                                                                                                                             | Summary                         |
-| ---                                                                                                                              | ---                             |
-| [DocumentLayout.json](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/.vs/simbatt/v17/DocumentLayout.json)     | <code>► INSERT-TEXT-HERE</code> |
-| [HierarchyCache.v1.txt](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/simbatt/.vs/simbatt/v17/HierarchyCache.v1.txt) | <code>► INSERT-TEXT-HERE</code> |
-
-</details>
-
-<details closed><summary>Setup</summary>
-
-| File                                                                                         | Summary                         |
-| ---                                                                                          | ---                             |
-| [Setup.vdproj](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/Setup/Setup.vdproj) | <code>► INSERT-TEXT-HERE</code> |
-
-</details>
-
-<details closed><summary>.github.workflows</summary>
-
-| File                                                                                                   | Summary                         |
-| ---                                                                                                    | ---                             |
-| [msbuild.yml](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/.github/workflows/msbuild.yml) | <code>► INSERT-TEXT-HERE</code> |
-
-</details>
-
-<details closed><summary>BatteryMonitor</summary>
-
-| File                                                                                                                                      | Summary                         |
-| ---                                                                                                                                       | ---                             |
-| [BatteryMonitor.vcxproj.filters](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryMonitor/BatteryMonitor.vcxproj.filters) | <code>► INSERT-TEXT-HERE</code> |
-| [BatteryMonitor.vcxproj](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryMonitor/BatteryMonitor.vcxproj)                 | <code>► INSERT-TEXT-HERE</code> |
-| [Main.cpp](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryMonitor/Main.cpp)                                             | <code>► INSERT-TEXT-HERE</code> |
-
-</details>
-
-<details closed><summary>BatteryConfig</summary>
-
-| File                                                                                                                                   | Summary                         |
-| ---                                                                                                                                    | ---                             |
-| [Battery.hpp](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryConfig/Battery.hpp)                                     | <code>► INSERT-TEXT-HERE</code> |
-| [BatteryConfig.vcxproj.filters](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryConfig/BatteryConfig.vcxproj.filters) | <code>► INSERT-TEXT-HERE</code> |
-| [runsdvui.cmd](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryConfig/runsdvui.cmd)                                   | <code>► INSERT-TEXT-HERE</code> |
-| [BatteryConfig.vcxproj](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryConfig/BatteryConfig.vcxproj)                 | <code>► INSERT-TEXT-HERE</code> |
-| [DeviceInstance.hpp](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryConfig/DeviceInstance.hpp)                       | <code>► INSERT-TEXT-HERE</code> |
-| [read info.cpp](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryConfig/read info.cpp)                                 | <code>► INSERT-TEXT-HERE</code> |
-| [Main.cpp](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryConfig/Main.cpp)                                           | <code>► INSERT-TEXT-HERE</code> |
-
-</details>
-
-<details closed><summary>BatteryConfig.Dependecies.Cgos</summary>
-
-| File                                                                                                      | Summary                         |
-| ---                                                                                                       | ---                             |
-| [Cgos.h](https://github.com/Agfiras/Battery-Driver_Hub/blob/master/BatteryConfig/Dependecies/Cgos/Cgos.h) | <code>► INSERT-TEXT-HERE</code> |
-
-</details>
-
----
-
-##  Getting Started
-
-**System Requirements:**
-
-* **None**: `version x.y.z`
-
-###  Installation
-
-<h4>From <code>source</code></h4>
-
-> 1. Clone the Battery-Driver_Hub repository:
->
-> ```console
-> $ git clone https://github.com/Agfiras/Battery-Driver_Hub
-> ```
->
-> 2. Change to the project directory:
-> ```console
-> $ cd Battery-Driver_Hub
-> ```
->
-> 3. Install the dependencies:
-> ```console
-> $ > INSERT-INSTALL-COMMANDS
-> ```
-
-###  Usage
-
-<h4>From <code>source</code></h4>
-
-> Run Battery-Driver_Hub using the command below:
-> ```console
-> $ > INSERT-RUN-COMMANDS
-> ```
-
-##  License
-
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
 
 
-[**Return**](#-overview)
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
----
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
+There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+
+Here's why:
+* Your time should be focused on creating something amazing. A project that solves a problem and helps others
+* You shouldn't be doing the same tasks over and over like creating a README from scratch
+* You should implement DRY principles to the rest of your life :smile:
+
+Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+
+Use the `BLANK_README.md` to get started.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Built With
+
+This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+* [![Vue][Vue.js]][Vue-url]
+* [![Angular][Angular.io]][Angular-url]
+* [![Svelte][Svelte.dev]][Svelte-url]
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![JQuery][JQuery.com]][JQuery-url]
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/your_username_/Project-Name.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your API in `config.js`
+   ```js
+   const API_KEY = 'ENTER YOUR API';
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+_For more examples, please refer to the [Documentation](https://example.com)_
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] Add Changelog
+- [x] Add back to top links
+- [ ] Add Additional Templates w/ Examples
+- [ ] Add "components" document to easily copy & paste sections of the readme
+- [ ] Multi-language Support
+    - [ ] Chinese
+    - [ ] Spanish
+
+See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+
+Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+
+* [Choose an Open Source License](https://choosealicense.com)
+* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
+* [Malven's Grid Cheatsheet](https://grid.malven.co/)
+* [Img Shields](https://shields.io)
+* [GitHub Pages](https://pages.github.com)
+* [Font Awesome](https://fontawesome.com)
+* [React Icons](https://react-icons.github.io/react-icons/search)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: images/screenshot.png
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next-url]: https://nextjs.org/
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React-url]: https://reactjs.org/
+[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+[Vue-url]: https://vuejs.org/
+[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[Angular-url]: https://angular.io/
+[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+[Svelte-url]: https://svelte.dev/
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+[Bootstrap-url]: https://getbootstrap.com
+[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+[JQuery-url]: https://jquery.com 
