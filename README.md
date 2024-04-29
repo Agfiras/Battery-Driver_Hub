@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" width="100" alt="project-logo">
 </p>
 <p align="center">
-    <h1 align="center">BATTERY-DRIVER_HUB</h1>
+    <h1 align="center">ADOK BATTERY</h1>
 </p>
 <p align="center">
     <em><code>► INSERT-TEXT-HERE</code></em>
@@ -28,11 +28,8 @@
 - [ Getting Started](#-getting-started)
   - [ Installation](#-installation)
   - [ Usage](#-usage)
-  - [ Tests](#-tests)
-- [ Project Roadmap](#-project-roadmap)
 - [ Contributing](#-contributing)
 - [ License](#-license)
-- [ Acknowledgments](#-acknowledgments)
 </details>
 <hr>
 
