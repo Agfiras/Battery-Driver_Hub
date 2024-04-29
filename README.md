@@ -31,31 +31,31 @@
   </a>
   <h3 align="center">ADOK BATTERY</h3> <br>
   <p align="center">
-    An Excutable to extract informations from COM EXPRESS board 
+    An Excutable to extract informations from PIC through COM Express board 
     <br>
    and interact with simbattery of windows
     <br />
-    <a href="https://github.com/Agfiras/Battery-Driver_Hub"><strong>Explore the docs »</strong></a>
-    <br />
-    <a href="https://github.com/Agfiras/Battery-Driver_Hub">View Demo</a>
+    <a href="https://github.com/Agfiras/Battery-Driver_Hub/blob/main/Logos/Screenshot.gif">View Demo ➡️</a>
   </p>
 </div>
 
 
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary><strong>Table of Contents</strong></summary>
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#functionality">Functionality</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#how-to-test">How to test</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#test-instruction">Test instruction</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
@@ -70,12 +70,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-
 <p> ADOK BATTERY is an executable designed to interact with the Simbat driver and extract information from COM Express board using the Cgos library. </p>
 
 <p>This tool enables users to retrieve essential data from the PIC, including battery <strong>Capacity</strong>, <strong>Rate</strong>, and <strong>Power state</strong> parameters. Subsequently, it updates the corresponding parameters of the Simbat driver, ensuring synchronization and accurate representation of battery status within the Windows system. </p>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Functionality
 
@@ -100,7 +98,6 @@ Optimized for the Windows x64 Environment using the Microsoft Visual Studio Inte
 * ![Windows][Windows.js]
 * [![VisualStudio][Visual Studio.js]][Visual Studio-url]
   
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## How to test
 It's recommended to **test in a Adok HUB** during development, since faulty drivers might crash or corrupt the computer and computers do not run with COM Express board. You can use the "checkpoint" feature to roll back the machine to a known good state in case of driver installations problems.
@@ -130,30 +127,23 @@ Steps:
 
 Below is an example of how you can install and setup your HUB.
 
-1. Run `INSTALL.bat` with admin privileges or run [Install](./Install_Driver.ps1) to install the driver simulated batterie.
-2. Run [Install](./mysetup.exe).
+1. Run `INSTALL.bat` with admin privileges or run [Install Driver](./Install_Driver.ps1) to install the driver simulated batterie.
+2. Run [mysetup.exe](./mysetup.exe).
 3. Reboot.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Firas Ajengui- [@LinkedIn](https://www.linkedin.com/in/firas-ajengui)
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
+Github: [AgFiras](https://github.com/Agfiras)
 
 
 <!-- ACKNOWLEDGMENTS -->
@@ -161,16 +151,8 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
-* [Malven's Grid Cheatsheet](https://grid.malven.co/)
-* [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
-* [Font Awesome](https://fontawesome.com)
-* [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+* [Writing Battery Miniclass Drivers](https://learn.microsoft.com/en-us/windows-hardware/drivers/battery/writing-battery-miniclass-drivers)
+* [Cgos Documentation](https://www.webpagefx.com/tools/emoji-cheat-sheet)
 
 
 
