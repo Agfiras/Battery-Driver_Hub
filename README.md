@@ -149,7 +149,7 @@ Github: [AgFiras](https://github.com/Agfiras)
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+I've included a few of my favorites to kick things off!
 
 * [Writing Battery Miniclass Drivers](https://learn.microsoft.com/en-us/windows-hardware/drivers/battery/writing-battery-miniclass-drivers)
 * [Cgos Documentation](https://www.webpagefx.com/tools/emoji-cheat-sheet)
