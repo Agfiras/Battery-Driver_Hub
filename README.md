@@ -8,7 +8,7 @@
     <em><code>► INSERT-TEXT-HERE</code></em>
 </p>
 <p align="center">
-	<img src="https://img.shields.io/github/license/Agfiras/Battery-Driver_Hub?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="MIT License">
+	<img src="https://github/Agfiras/Battery-Driver_Hub?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="MIT License">
 	<img src="https://img.shields.io/github/languages/top/Agfiras/Battery-Driver_Hub?style=default&color=0080ff" alt="C++">
 <p>
 <p align="center">
