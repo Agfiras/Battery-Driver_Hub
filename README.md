@@ -71,7 +71,7 @@
 
 <p> ADOK BATTERY is an executable designed to interact with the Simbat driver and extract information from Pic Through COM Express board using the Cgos library. </p>
 
-<p>This tool enables users to retrieve essential data from the PIC, including battery <strong>Capacity</strong>, <strong>Rate</strong>, and <strong>Power state</strong> parameters. Subsequently, it updates the corresponding parameters of the Simbat driver, ensuring synchronization and accurate representation of battery status within the Windows system. </p>
+<p>This program retrieves data from the PIC by communicating with COM Express using Cgos.dll and updates the parameters of the Simbat driver, including battery <strong>capacity</strong>, <strong>rate</strong>, and <strong>power state</strong> parameters. It ensures synchronization and accurate representation of the battery status within the Windows system.</p>
 
 
 ### Functionality
