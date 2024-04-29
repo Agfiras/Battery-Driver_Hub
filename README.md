@@ -42,7 +42,6 @@
 </div>
 
 
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -71,11 +70,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 <p> ADOK BATTERY is an executable designed to interact with the Simbat driver and extract information from COM Express board using the Cgos library. </p>
 
-<p>This tool enables users to retrieve essential data from the PIC, including battery <strong>Capacity</strong>, Rate values, and power states parameters. Subsequently, it updates the corresponding parameters of the Simbat driver, ensuring synchronization and accurate representation of battery status within the COM Express system. </p>
+<p>This tool enables users to retrieve essential data from the PIC, including battery <strong>Capacity</strong>, <strong>Rate</strong>, and <strong>Power state</strong> parameters. Subsequently, it updates the corresponding parameters of the Simbat driver, ensuring synchronization and accurate representation of battery status within the Windows system. </p>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -86,111 +84,57 @@
 
 * The address and command for reading battery information can be configured in the ReadBatInfo function, in BatteryConfig/main.cpp
   * The address (addr) is set to 0x26, which corresponds to the PIC address.
-  * Commands "0D" and "12" are used to retrieve specific battery information:
+  * Commands "0D"and "12" are used to retrieve specific battery information:
     
     * "0D" retrieves the battery percentage remaining.
-    * "12" retrieves the and power state and the time to empty.
+    * "12" retrieves the power state and the time to empty.
     <br>
     🟩 (time to empty to show only in console for verification, the remaining time of windows is done by calcualtion of the Rate parameter)
       
 ### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
-
+This Project is developed mainly with two languages , the excutable with C++ and th driver with C.
+* [![C][C.js]][C-url]
+* [![C++][C++.js]][C++-url]
+<br> </br>
+Optimized for the Windows x64 Environment using the Microsoft Visual Studio Integrated Development Environment (IDE).
+* ![Windows][Windows.js]
+* [![VisualStudio][Visual Studio.js]][Visual Studio-url]
+  
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+## How to test
+It's recommended to **test in a Adok HUB** during development, since faulty drivers might crash or corrupt the computer and computers do not run with COM Express board. You can use the "checkpoint" feature to roll back the machine to a known good state in case of driver installations problems.
 
 ### Prerequisites
+Prerequisites for the _host_ computer:
+* Install [Visual Studio](https://visualstudio.microsoft.com/).
+* Install [Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
+* (optional) Install [WiX toolset](https://wixtoolset.org/) for MSI installer packaging.
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Prerequisites for the _target_ computer:
+* Disable Secure Boot in UEFI/BIOS (run [check](./check_secure_boot.ps1)to check).
+* Enable test-signed drivers: [`bcdedit /set testsigning on`](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option)(run [Enable](Enable.ps1))
+* Enable kernel debugging: `bcdedit /debug on` (optional)
+
+### Test instruction
+You can with the driver **make Windows believe that it’s being powered**.
+
+Steps:
+* Build solution in Visual Studio or download binaries from [releases](../../releases).
+* Run `INSTALL.bat` with admin privileges to install the driver a simulated batterie.
+* Run `BatteryConfig.exe`.
+* Run `UNINSTALL.bat` with admin privileges to uninstall the driver and delete simulated batterie.
+
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+Below is an example of how you can install and setup your HUB.
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+1. Run `INSTALL.bat` with admin privileges or run [Install](./Install_Driver.ps1) to install the driver simulated batterie.
+2. Run [Install](./mysetup.exe).
+3. Reboot.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- LICENSE -->
 ## License
@@ -238,3 +182,10 @@ Use this space to list resources you find helpful and would like to give credit 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
+[C.js]: https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=whit
+[C-url]: https://learn.microsoft.com/en-us/cpp/c-language/?view=msvc-170
+[C++.js]: https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white
+[C++-url]: https://isocpp.org/
+[Windows.js]: https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white
+[Visual Studio.js]: https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white
+[Visual Studio-url]: https://visualstudio.microsoft.com/fr/downloads/
