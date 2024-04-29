@@ -71,7 +71,7 @@
 
 <p> ADOK BATTERY is an executable designed to interact with the Simbat driver and extract information from Pic Through COM Express board using the Cgos library. </p>
 
-<p>This program retrieves data from the PIC by communicating with COM Express using Cgos.dll and updates the parameters of the Simbat driver, including battery <strong>capacity</strong>, <strong>rate</strong>, and <strong>power state</strong> parameters. It ensures synchronization and accurate representation of the battery status within the Windows system.</p>
+<p>This program updates the parameters of the Simbat driver, including battery <strong>capacity</strong>, <strong>rate</strong>, and <strong>power state</strong> parameters. It ensures synchronization and accurate representation of the battery status within the Windows system.</p>
 
 
 ### Functionality
@@ -99,7 +99,7 @@ Optimized for the Windows x64 Environment using the Microsoft Visual Studio Inte
   
 
 ## How to test
-It's recommended to **test in a Adok HUB** during development, since faulty drivers might crash or corrupt the computer and computers do not run with COM Express board. You can use the "checkpoint" feature to roll back the machine to a known good state in case of driver installations problems.
+It's recommended to **test in a Adok HUB** during development, since faulty drivers might crash or corrupt the computer and it will crash since the computer do not run with COM Express board. You can use the "checkpoint" feature to roll back the machine to a known good state in case of driver installations problems.
 
 ### Prerequisites
 Prerequisites for the _host_ computer:
@@ -107,7 +107,7 @@ Prerequisites for the _host_ computer:
 * Install [Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
 * (optional) Install [WiX toolset](https://wixtoolset.org/) for MSI installer packaging.
 
-Prerequisites for the _target_ computer:
+Prerequisites for the _target_HUB:
 * Disable Secure Boot in UEFI/BIOS (run [check](./check_secure_boot.ps1)to check).
 * Enable test-signed drivers: [`bcdedit /set testsigning on`](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option)(run [Enable](Enable.ps1))
 * Enable kernel debugging: `bcdedit /debug on` (optional)
@@ -153,8 +153,7 @@ I've included a few of my favorites to kick things off!
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://www.linkedin.com/in/firas-ajengui
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: images/screenshot.png
+[linkedin-url]: [https://linkedin.com/in/othneildrew](https://www.linkedin.com/in/firas-ajengui)
 [C.js]: https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=whit
 [C-url]: https://learn.microsoft.com/en-us/cpp/c-language/?view=msvc-170
 [C++.js]: https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white
