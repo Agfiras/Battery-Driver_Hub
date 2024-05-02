@@ -67,7 +67,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## About The Project 
 
 <p> ADOK BATTERY is an executable designed to interact with the Simbat driver and extract information from Pic Through COM Express board using the Cgos library. </p>
 
