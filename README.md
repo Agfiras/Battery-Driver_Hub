@@ -151,9 +151,9 @@ I've included a few of my favorites to kick things off!
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://www.linkedin.com/in/firas-ajengui
+[license-url]: ./LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: [https://linkedin.com/in/othneildrew](https://www.linkedin.com/in/firas-ajengui)
+[linkedin-url]: https://www.linkedin.com/in/firas-ajengui
 [C.js]: https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=whit
 [C-url]: https://learn.microsoft.com/en-us/cpp/c-language/?view=msvc-170
 [C++.js]: https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white
