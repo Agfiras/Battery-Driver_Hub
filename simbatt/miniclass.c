@@ -22,8 +22,8 @@ Abstract:
 
 //--------------------------------------------------------------------- Literals
 
-#define DEFAULT_NAME                L"SimulatedBattery"
-#define DEFAULT_MANUFACTURER        L"Microsoft Corp"
+#define DEFAULT_NAME                L"Adok Battery"
+#define DEFAULT_MANUFACTURER        L"Adok Le hub tactile"
 #define DEFAULT_SERIALNO            L"0000"
 #define DEFAULT_UNIQUEID            L"SimulatedBattery0000"
 
