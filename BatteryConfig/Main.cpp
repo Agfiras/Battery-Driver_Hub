@@ -62,7 +62,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR lpCmdLin
    
     // wprintf(L"Power state: Battery is %s\n", PowerInfo == 1 ? L"powered" : L"not powered"); // Check if battery is powered
 
-    wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000"; // Device instance path
+    wchar_t deviceInstancePath[18] = L"ROOT\\BATTERY\\0000" ; // Device instance path
 
     //wprintf(L"DeviceInstancePath: %s\n", deviceInstancePath); // Print device instance path
 

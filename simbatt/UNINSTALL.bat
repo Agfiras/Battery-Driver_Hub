@@ -3,8 +3,7 @@
 cd /d "%~dp0"
 
 :: Delete simulated battery
-devgen /remove "SWD\DEVGEN\1"
-
+devcon.exe /r remove "{6B34C467-CE1F-4c0d-A3E4-F98A5718A9D6}\SimBatt"
 :: Uninstall driver
 pnputil.exe /delete-driver simbatt.inf /uninstall
 

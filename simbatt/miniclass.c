@@ -22,8 +22,8 @@ Abstract:
 
 //--------------------------------------------------------------------- Literals
 
-#define DEFAULT_NAME                L"Adok Battery"
-#define DEFAULT_MANUFACTURER        L"Adok Le hub tactile"
+#define DEFAULT_NAME                L"SimulatedBattery"
+#define DEFAULT_MANUFACTURER        L"Microsoft Corp"
 #define DEFAULT_SERIALNO            L"0000"
 #define DEFAULT_UNIQUEID            L"SimulatedBattery0000"
 
@@ -142,8 +142,8 @@ Arguments:
         SimBattUpdateTag(DevExt);
         DevExt->State.Version = SIMBATT_STATE_VERSION;
         DevExt->State.BatteryStatus.PowerState = BATTERY_POWER_ON_LINE;
-        DevExt->State.BatteryStatus.Capacity = 100;
-        DevExt->State.BatteryStatus.Voltage = BATTERY_UNKNOWN_VOLTAGE;
+        DevExt->State.BatteryStatus.Capacity = 20;
+        DevExt->State.BatteryStatus.Voltage = 14;
         DevExt->State.BatteryStatus.Rate = -80;
         DevExt->State.BatteryInfo.Capabilities = BATTERY_SYSTEM_BATTERY;
         DevExt->State.EstimatedTime = SIMBATT_RATE_CALCULATE;

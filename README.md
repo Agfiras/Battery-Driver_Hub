@@ -67,7 +67,7 @@
 
 
 <!-- ABOUT THE PROJECT -->
-## About The Project 
+## About The Project
 
 <p> ADOK BATTERY is an executable designed to interact with the Simbat driver and extract information from Pic Through COM Express board using the Cgos library. </p>
 
@@ -127,7 +127,7 @@ Steps:
 Below is an example of how you can install and setup your HUB.
 
 1. Run `INSTALL.bat` with admin privileges or run [Install Driver](./Install_Driver.ps1) to install the driver simulated batterie.
-2. Run [mysetup.exe](./mysetup.exe).
+2. Run [mysetup.exe](./Setup/mysetup.exe).
 3. Reboot.
 
 
@@ -151,7 +151,7 @@ I've included a few of my favorites to kick things off!
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: ./LICENSE
+[license-url]: https://github.com/my-adok/APP-BatteryDriver/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/firas-ajengui
 [C.js]: https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=whit
@@ -161,3 +161,4 @@ I've included a few of my favorites to kick things off!
 [Windows.js]: https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white
 [Visual Studio.js]: https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white
 [Visual Studio-url]: https://visualstudio.microsoft.com/fr/downloads/
+
