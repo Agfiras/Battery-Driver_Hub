@@ -7,7 +7,7 @@
 #include <wrl/wrappers/corewrappers.h>
 
 int ReadBatInfo(std::string command, std::string& timeToEmpty) 
-{
+{ 
     unsigned int percentageRemaining = 0;   // Battery percentage remaining
     byte addr = 0x26; // Pic Address
     byte cmd = 0;     // Commande
