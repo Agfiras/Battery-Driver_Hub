@@ -20,7 +20,7 @@ int ReadBatInfo(std::string command, std::string& timeToEmpty)
         std::cerr << "Invalid argument: " << command << std::endl; 
     }
 
-    UINT16 data_u16 = 0;
+    UINT16 data_u16 = 0;// Use hex 
     byte rData[2] = { 0 }; // Use stack-allocated array
     byte wData[1] = { cmd };  // Use stack-allocated array
 
