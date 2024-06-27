@@ -6,7 +6,7 @@ Module Name:
 
     miniclass.c
 
-Abstract:
+Abstract: 
 
     This module implements battery miniclass functionality specific to the
     simulated battery driver.
