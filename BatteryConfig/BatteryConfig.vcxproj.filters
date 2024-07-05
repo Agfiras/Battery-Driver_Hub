@@ -2,10 +2,14 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ServiceBase.cpp" />
+    <ClCompile Include="BatteryService.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battery.hpp" />
     <ClInclude Include="DeviceInstance.hpp" />
     <ClInclude Include="Dependecies\Cgos\Cgos.h" />
+    <ClInclude Include="ServiceBase.hpp" />
+    <ClInclude Include="BatteryService.hpp" />
   </ItemGroup>
 </Project>

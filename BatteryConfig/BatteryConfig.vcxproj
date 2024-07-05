@@ -85,16 +85,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BatteryService.cpp" />
     <ClCompile Include="Main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)BatteryConfig\Dependecies\Cgos</AdditionalIncludeDirectories>
       <TreatWarningAsError Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</TreatWarningAsError>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)BatteryConfig\Dependecies\Cgos</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="ServiceBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Battery.hpp" />
+    <ClInclude Include="BatteryService.hpp" />
     <ClInclude Include="Dependecies\Cgos\Cgos.h" />
     <ClInclude Include="DeviceInstance.hpp" />
+    <ClInclude Include="ServiceBase.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
