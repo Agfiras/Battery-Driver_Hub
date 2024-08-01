@@ -1,6 +1,6 @@
 // main.cpp
 #include <windows.h>
-#include "BatteryService.hpp"
+#include "BatteryService.hpp" 
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow) {
     CBatteryService service(TEXT("BatteryService"));
