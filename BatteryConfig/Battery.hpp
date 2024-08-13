@@ -9,7 +9,7 @@
 
 
 /** Convenience function for getting the battery tag that's needed for some IOCTL calls. */
-ULONG GetBatteryTag(HANDLE device) {
+ULONG GetBatteryTag(HANDLE device) { 
     // get battery tag (needed in later calls)
     ULONG battery_tag = 0;
     ULONG wait = 0;
