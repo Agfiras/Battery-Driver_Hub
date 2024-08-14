@@ -68,9 +68,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<p> ADOK BATTERY is an executable designed to interact with the Simbat driver and extract information from Pic Through COM Express board using the Cgos library. </p>
+<p>ADOK BATTERY is an executable designed to interface with the Simbat driver to extract battery information via a COM Express board using the CGOS library. This program updates parameters such as battery <strong>capacity</strong>, <strong>rate</strong>, and <strong>power state</strong>, ensuring synchronized and accurate representation of the battery status within the Windows system.</p>
 
-<p>This program updates the parameters of the Simbat driver, including battery <strong>capacity</strong>, <strong>rate</strong>, and <strong>power state</strong> parameters. It ensures synchronization and accurate representation of the battery status within the Windows system.</p>
 
 ### Built With
 This Project is developed mainly with two languages , the excutable with C++ and th driver with C.
@@ -148,11 +147,18 @@ Steps:
 * Run `UNINSTALL.bat` with admin privileges to uninstall the driver and delete simulated batterie.
 * Run this to stop and delete the service: `sc stop BatteryService` then `sc delete BatteryService`
 
+### Troubleshooting
+- **Error LNK2019: Unresolved external symbol WinMain:**
+   - Ensure the entry point is correctly defined as wWinMain in `main.cpp`.
+   - Verify that the project subsystem is set to Windows (not Console).
+- **Error LNK2005: Function already defined:**
+   - Check for multiple definitions of the same function in different files.
+   - Use include guards in header files to prevent multiple inclusions.
 
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.
 
 
 <!-- ACKNOWLEDGMENTS -->
@@ -170,7 +176,7 @@ I've included a few of my favorites to kick things off!
 
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
 [license-url]: https://github.com/my-adok/APP-BatteryDriver/blob/main/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 [linkedin-url]: https://www.linkedin.com/in/firas-ajengui
 [C.js]: https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=whit
 [C-url]: https://learn.microsoft.com/en-us/cpp/c-language/?view=msvc-170
