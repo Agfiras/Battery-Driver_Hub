@@ -158,7 +158,7 @@ Steps:
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See [`LICENSE.txt`](./LICENSE.txt) for more information.
+Distributed under the MIT License. See [`LICENSE.txt`](https://github.com/my-adok/APP-BatteryDriver/blob/main/LICENSE.txt) for more information.
 
 
 <!-- ACKNOWLEDGMENTS -->
