@@ -49,6 +49,7 @@
       <ul>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#Project-Structure">Project Structure</a></li>
+        <li><a href="#ReadBatInfo-Function">ReadBatInfo Function</a></li>
       </ul>
     </li>
     <li>
@@ -56,6 +57,7 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#test-instruction">Test instruction</a></li>
+        <li><a href="#Troubleshooting">Troubleshooting</a></li>
       </ul>
     </li>
     <li><a href="#license">License</a></li>
@@ -116,7 +118,33 @@ Optimized for the Windows x64 Environment using the Microsoft Visual Studio Inte
   - Implements methods for interacting with device instances.
   - Accesses the PDO path, driver version, and other device metadata.
   
+### ReadBatInfo Function
 
+The `ReadBatInfo` function is a critical part of the battery monitoring system. It interacts with the CGOS (Congatec Generic Operating System) library to retrieve specific battery-related information via I2C communication. Below is an overview of the function and its operation:
+
+**Parameters:**
+* command: A string that represents the I2C command to be sent. This command determines which battery information will be retrieved (e.g., battery percentage or power status).
+  
+**Operation:**
+
+1. Initialization:
+    - The function initializes various parameters, including the I2C address (addr) and command (cmd), which are converted 
+   from strings to bytes.
+    - Memory is allocated for the write and read data buffers (wData and rData).
+  
+2. I2C Communication:
+    - The CGOS library is initialized, and a handle to the CGOS board is opened.
+    - The function sends the command to the I2C address and reads the corresponding data from the battery.
+
+3. Command Handling:
+    - If the command is "0D", the function reads the battery's percentage remaining.
+    - If the command is "12", the function determines whether the battery is powered by reading the data and checking for 
+   a specific value.
+
+4. Cleanup:
+    - After the operation, the function deallocates the memory used for the data buffers and returns the relevant       
+   information (battery percentage or power status).
+   
 ## How to test
 It's recommended to **test in a Adok HUB** during development, since faulty drivers might crash or corrupt the computer and it will crash since the computer do not run with COM Express board. You can use the "checkpoint" feature to roll back the machine to a known good state in case of driver installations problems.
 
