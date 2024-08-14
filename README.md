@@ -47,8 +47,8 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#functionality">Functionality</a></li>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#Project Structure">Project Structure</a></li>
       </ul>
     </li>
     <li>
@@ -56,7 +56,6 @@
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#test-instruction">Test instruction</a></li>
-        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#license">License</a></li>
@@ -73,21 +72,6 @@
 
 <p>This program updates the parameters of the Simbat driver, including battery <strong>capacity</strong>, <strong>rate</strong>, and <strong>power state</strong> parameters. It ensures synchronization and accurate representation of the battery status within the Windows system.</p>
 
-
-### Functionality
-
-* The program is configured to Read battery information and swipe it with the parameters of the simbatt driver with a specific device instance path.
-* Change the device instance path in the code if necessary.
-
-* The address and command for reading battery information can be configured in the ReadBatInfo function, in BatteryConfig/main.cpp
-  * The address (addr) is set to 0x26, which corresponds to the PIC address.
-  * Commands "0D"and "12" are used to retrieve specific battery information:
-    
-    * "0D" retrieves the battery percentage remaining.
-    * "12" retrieves the power state and the time to empty.
-    <br>
-    🟩 (time to empty to show only in console for verification, the remaining time of windows is done by calcualtion of the Rate parameter)
-      
 ### Built With
 This Project is developed mainly with two languages , the excutable with C++ and th driver with C.
 * [![C][C.js]][C-url]
@@ -98,37 +82,71 @@ Optimized for the Windows x64 Environment using the Microsoft Visual Studio Inte
 * [![VisualStudio][Visual Studio.js]][Visual Studio-url]
   
 
+### Project Structure
+
+- **main.cpp**:
+  - Entry point for the application.
+  - Contains the main loop for continuous monitoring of battery status.
+  - Initializes the service through the `wWinMain` function.
+
+- **BatteryService.hpp**: 
+  - Defines the `CBatteryService` class.
+  - Inherits from `CServiceBase` to manage Windows service events.
+  - Methods to start, stop, and handle service interruptions.
+
+- **BatteryService.cpp**:
+  - Implements the methods defined in `BatteryService.hpp`.
+  - Includes the logic for starting and stopping the service.
+  - Contains the service worker thread (`ServiceWorkerThread`) for continuous monitoring.
+
+- **Battery.hpp**:
+  - Defines the `BatteryStausWrap` class.
+  - Methods for interacting with the battery, including retrieving the charge percentage and determining if the battery is powered.
+  - Declaration of the `ReadBatInfo` function for reading information via I2C.
+
+- **Battery.cpp**:
+  - Implements the methods from `Battery.hpp`.
+  - Manages I2C communication with the battery.
+  - Converts raw data into readable information (e.g., percentage, power status).
+
+- **DeviceInstance.hpp**:
+  - Defines the `DeviceInstance` class.
+  - Provides methods to retrieve specific information about a device (e.g., driver version).
+
+- **DeviceInstance.cpp**:
+  - Implements methods for interacting with device instances.
+  - Accesses the PDO path, driver version, and other device metadata.
+  
+
 ## How to test
 It's recommended to **test in a Adok HUB** during development, since faulty drivers might crash or corrupt the computer and it will crash since the computer do not run with COM Express board. You can use the "checkpoint" feature to roll back the machine to a known good state in case of driver installations problems.
 
 ### Prerequisites
-Prerequisites for the _host_ computer:
-* Install [Visual Studio](https://visualstudio.microsoft.com/).
-* Install [Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
-* (optional) Install [WiX toolset](https://wixtoolset.org/) for MSI installer packaging.
 
-Prerequisites for the _target_HUB:
-* Disable Secure Boot in UEFI/BIOS (run [check](./check_secure_boot.ps1)to check).
-* Enable test-signed drivers: [`bcdedit /set testsigning on`](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option)(run [Enable](Enable.ps1))
-* Enable kernel debugging: `bcdedit /debug on` (optional)
+For the **host** computer:
+- Install [Visual Studio](https://visualstudio.microsoft.com/).
+- Install [Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
+
+For the **target HUB**:
+- Disable Secure Boot in UEFI/BIOS.
+- Enable test-signed drivers: [`bcdedit /set testsigning on`](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/the-testsigning-boot-configuration-option).
+- (Optional) Enable kernel debugging: `bcdedit /debug on`.
 
 ### Test instruction
-You can with the driver **make Windows believe that it’s being powered**.
+Use the driver to **simulate battery behavior** on Windows.
 
 Steps:
 * Build solution in Visual Studio or download binaries from [releases](../../releases).
 * Run `INSTALL.bat` with admin privileges to install the driver a simulated batterie.
-* Run `BatteryConfig.exe`.
+* Run the following command in an elevated command prompt to install the service: 
+  ```sh
+   sc create BatteryService binPath= "C:\path\to\your\BatteryConfig.exe"
+* Run this command to start the Service :
+  ```sh
+  `sc start BatteryService`
+* Reboot.
 * Run `UNINSTALL.bat` with admin privileges to uninstall the driver and delete simulated batterie.
-
-
-### Installation
-
-Below is an example of how you can install and setup your HUB.
-
-1. Run `INSTALL.bat` with admin privileges or run [Install Driver](./Install_Driver.ps1) to install the driver simulated batterie.
-2. Run [mysetup.exe](./Setup/mysetup.exe).
-3. Reboot.
+* Run this to stop and delete the service: `sc stop BatteryService` then `sc delete BatteryService`
 
 
 <!-- LICENSE -->
