@@ -30,7 +30,9 @@ jobs:
     - name: Build Solution
       run: msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }}
       
-    
+    - name: Install GitHub CLI
+      run: sudo apt-get install gh
+      
     - name: Create release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
