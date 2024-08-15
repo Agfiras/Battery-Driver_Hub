@@ -31,8 +31,10 @@ jobs:
       run: msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }}
       
     - name: Install GitHub CLI
-      run: sudo apt-get install gh
-      
+      run: |
+        Invoke-WebRequest -Uri https://github.com/cli/cli/releases/download/v2.34.0/gh_2.34.0_windows_amd64.msi -OutFile gh-cli.msi
+        Start-Process msiexec.exe -Wait -ArgumentList '/I gh-cli.msi /quiet /norestart'
+
     - name: Create release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
