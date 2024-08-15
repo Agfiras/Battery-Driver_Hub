@@ -33,13 +33,13 @@ jobs:
       run: msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }}
       
     - name: Create Release
-      id: create_release 
+      id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref_name }}  # Use the tag name from the current context
-        release_name: Release ${{ github.ref_name }}  # Set the release name
+        tag_name: ${{ github.ref_name }}
+        release_name: "Release ${{ github.ref_name }} - ${{ github.run_id }}"  # Use a unique name including run_id
         draft: false
         prerelease: false
 
