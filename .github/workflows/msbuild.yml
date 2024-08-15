@@ -1,10 +1,4 @@
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: MSBuild
+name: Build and Release
 
 on:
   push:
@@ -13,16 +7,12 @@ on:
     branches: [ "main" ]
 
 env:
-  # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: "BatterySimulator.sln"
-
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
 
 permissions:
   contents: read
+  actions: write
 
 jobs:
   build:
@@ -31,23 +21,42 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
-     
-        
-    - name: check Secure Boot
-      shell: pwsh
-      run: ./check_secure_boot.ps1
-
+      
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1.0.2
       with:
         msbuild-architecture: x64
-          
-    - name: Enable test-signed drivers
-      shell: pwsh
-      run: |
-        bcdedit /set testsigning on
         
-    - name: Run INSTALL.bat as Administrator
-      shell: pwsh
-      run: ./Install_Driver.ps1
-    
+    - name: Build Solution
+      run: msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }}
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: Upload batteryconfig.exe to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: D:\a\x6\Debug\batteryconfig\+\*.exe
+        asset_name: batteryconfig.exe
+        asset_content_type: application/octet-stream
+
+    - name: Upload simbat folder to Release
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: D:\a\x6\Debug\simbatt
+        asset_name: simbatt.zip
+        asset_content_type: application/zip
