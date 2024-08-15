@@ -51,12 +51,16 @@ jobs:
         asset_name: batteryconfig.exe
         asset_content_type: application/octet-stream
 
-    - name: Upload simbat folder to Release
+    - name: Compress Simbatt Folder
+      run: |
+        Compress-Archive -Path "D:\a\Battery-Driver_Hub\Battery-Driver_Hub\x64\Debug\simbatt" -DestinationPath "D:\a\Battery-Driver_Hub\Battery-Driver_Hub\x64\Debug\simbatt.zip"
+    
+    - name: Upload Simbatt Folder as Zip to Release
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path:  D:\a\Battery-Driver_Hub\x64\Debug\simbatt
+        asset_path: D:\a\Battery-Driver_Hub\Battery-Driver_Hub\x64\Debug\simbatt.zip
         asset_name: simbatt.zip
         asset_content_type: application/zip
