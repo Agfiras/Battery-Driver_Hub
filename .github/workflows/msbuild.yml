@@ -39,11 +39,11 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        tag=${{ github.ref_name }}
-        gh release create "$tag" \
-          --repo="$GITHUB_REPOSITORY" \
-          --title="${GITHUB_REPOSITORY#*/} ${tag#v}" \
-          --generate-notes
+        $tag = '${{ github.ref_name }}'
+        gh release create $tag `
+        --repo $GITHUB_REPOSITORY `
+        --title "${GITHUB_REPOSITORY#*/} ${tag#v}" `
+        --generate-notes
 
     - name: Upload batteryconfig.exe to Release
       uses: actions/upload-release-asset@v1
