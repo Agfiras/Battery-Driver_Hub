@@ -31,13 +31,6 @@ jobs:
         
     - name: Build Solution
       run: msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }}
-    
-    - name: Retrieve Commit Message
-      id: get_commit_message
-      run: |
-        commit_message=$(git log -1 --pretty=format:"%s")
-        echo "RELEASE_NAME=$commit_message" >> $GITHUB_ENV
-        echo "Commit message retrieved: $commit_message"
         
     - name: Create Release
       id: create_release
