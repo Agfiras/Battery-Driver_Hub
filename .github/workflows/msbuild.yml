@@ -32,13 +32,14 @@ jobs:
     - name: Build Solution
       run: msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }}
       
-    - name: Create release
+    - name: Create Release
       id: create_release
-      uses: softprops/action-gh-release@v1
+      uses: actions/create-release@v1
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        files: |
-          D:\a\Battery-Driver_Hub\Battery-Driver_Hub\x64\Debug\batteryconfig.exe
-          D:\a\Battery-Driver_Hub\Battery-Driver_Hub\x64\Debug\simbatt.zip
+          tag_name: ${{ steps.tag_generator.outputs.new_tag }} 
+          release_name: Release ${{ steps.tag_generator.outputs.new_tag }} 
 
     - name: Upload batteryconfig.exe to Release
       uses: actions/upload-release-asset@v1
