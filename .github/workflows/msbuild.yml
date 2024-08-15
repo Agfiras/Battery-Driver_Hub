@@ -30,29 +30,16 @@ jobs:
     - name: Build Solution
       run: msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }}
       
-    - name: Create Tag
-      id: tag_version
-      run: |
-        TAG_NAME=$(git describe --tags --abbrev=0)
-        if [ -z "$TAG_NAME" ]; then
-          TAG_NAME="v1.0.0"
-        else
-          TAG_NAME="v$((${TAG_NAME/v/}+1)).0.0"
-        fi
-        echo "::set-output name=TAG_NAME::$TAG_NAME"
-        git tag $TAG_NAME
-        git push origin $TAG_NAME
-
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.tag_version.outputs.TAG_NAME }}
-        release_name: Release ${{ steps.tag_version.outputs.TAG_NAME }}
-        draft: false
-        prerelease: false
+          tag_name: 3.0.0
+          release_name: 3.0.0
+          draft: false
+          prerelease: false
 
     - name: Upload batteryconfig.exe to Release
       uses: actions/upload-release-asset@v1
