@@ -47,7 +47,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: D:\a\Battery-Driver_Hub\Battery-Driver_Hub\x64\Debug\batteryconfig\+\*.exe
+        asset_path: D:\a\Battery-Driver_Hub\x64\Debug\batteryconfig\+\*.exe
         asset_name: batteryconfig.exe
         asset_content_type: application/octet-stream
 
@@ -57,6 +57,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path:  D:\a\Battery-Driver_Hub\Battery-Driver_Hub\x64\Debug\simbatt
+        asset_path:  D:\a\Battery-Driver_Hub\x64\Debug\simbatt
         asset_name: simbatt.zip
         asset_content_type: application/zip
