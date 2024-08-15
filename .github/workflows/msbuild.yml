@@ -11,7 +11,7 @@ env:
   BUILD_CONFIGURATION: Debug
 
 permissions:
-  contents: read
+  contents: write
   actions: write
 
 jobs:
