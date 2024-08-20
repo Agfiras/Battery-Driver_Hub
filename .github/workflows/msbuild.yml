@@ -10,6 +10,7 @@ on:
 
 env:
   SOLUTION_FILE_PATH: "BatterySimulator.sln"
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   BUILD_CONFIGURATION: Debug
 
 permissions:
@@ -33,15 +34,17 @@ jobs:
       run: msbuild ${{ env.SOLUTION_FILE_PATH }} /p:Configuration=${{ env.BUILD_CONFIGURATION }}
         
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - id: release
+      uses: rymndhng/release-on-push-action@master
       with:
-        tag_name: ${{ github.ref_name }}
-        release_name: ${{ env.RELEASE_NAME }}
-        draft: false
-        prerelease: false
+        bump_version_scheme: minor
+        tag_prefix: v
+          
+    - name: Check Output Parameters
+      run: |
+          echo "Got tag name ${{ steps.release.outputs.tag_name }}"
+          echo "Got release version ${{ steps.release.outputs.version }}"
+          echo "Upload release artifacts to ${{ steps.release.outputs.upload_url }}"
 
     - name: Upload batteryconfig.exe to Release
       uses: actions/upload-release-asset@v1
